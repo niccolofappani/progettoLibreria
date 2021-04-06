@@ -15,30 +15,27 @@
         <div id='background'></div>
         <div id='container'>
             <div id='Image'>
-                <img id='logo' src='libro.png' alt='libro'>
+                <img id='logo' src='img/libro.png' alt='libro'>
             </div>
             <div id='buttons'>
-                
                 <h3><input type='button'  class='btn btn-warning' id='login' value='Login' data-toggle='modal' data-target='#logging'></input> 
                 <input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick='document.location='SignUp.php''></input>
-                |  <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
+                | <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
             </div>
             
-                <form method='get' action='registered.php'>
-                   <legend>Registrazione</legend>
+                <form id='formRegistrazione' method='get' action='registered.php'>
+                   <h1>Registrazione</h1>
                    <label for='name'>Nome: </label> <input type='text' id='name' placeholder='Mario' required> <br>
                    <label for='surname'>Cognome: </label> <input type='text' id='surname' placeholder='Rossi' required> <br> 
-                   <label for='email'>e-mail: </label> <input type='email' id='email' placeholder='example@gmail.com' required> <br>
+                   <label for='email'>E-mail: </label> <input type='email' id='email' placeholder='example@gmail.com' required> <br>
                    <label for='psw'>Password: </label> <input type='password' id='psw' placeholder='******' required> <br>
                    <label for='codFisc'>Codice Fiscale: </label> <input type='text' id='codFisc' required> <br>
                    <label for='address'>Via: </label> <input type='text' id='address'> <br>
                    <label for='number'>Numero Civico: </label> <input type='number' id='number' min='1'> <br>
                    <label for='cap'>Codice Postale: </label> <input type='number' id='cap' placeholder='12345'> <br>
-                   </form>
-
-                
+                </form>
             </div>
-      </div>
+        </div>
     </body>
     </html>"
 ?>
