@@ -1,7 +1,7 @@
 <html>
 <head>
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css"  type="text/css">
+    <title>Home</title>
+    <link rel="stylesheet" href="./styles.css"  type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,8 +13,9 @@
     <div id="background"></div>
 
     <div id="container">
+        <img id="logo" src="img/libro.png" alt="libro">
+
         <div id="top">
-            <img id="logo" src="img/libro.png" alt="libro">
             <label id="title">Libreria di Scandicci</label>
             <form id="searchForm">
                 <input id="searchBar" type="search" placeholder="Cerca..."></input>
@@ -55,6 +56,16 @@
             </div>
         </div>
 
+        <div  id="description">
+            <p>
+                La libreria di Scandicci offre una vasta scelta di libri, sia per i grandi che per i piccini.
+                È possibile sia acquistare che prendere in prestito i libri, basta registrarsi e poi fare il 
+                login prima di compiere una delle due azioni. </br>
+                Per comprare un libro sarà necessario inserire i dati di pagamento, mentre per prenderlo 
+                in prestito sarà necessario inserire la data d'inizio del prestito e della fine (il prestito 
+                di un libro può durare al massimo un mese).
+            </p>
+        </div>
     </div>
     
     <div class="modal fade" id="logging" role="dialog">

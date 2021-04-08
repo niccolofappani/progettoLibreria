@@ -23,7 +23,7 @@
                 | <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
             </div>
             
-                <form id='formRegistrazione' method='get' action='registered.php'>
+                <form id='formRegistrazione' method='post' action='registered.php'>
                    <h1>Registrazione</h1>
                    <label for='name'>Nome: </label> <input type='text' id='name' placeholder='Mario' required> <br>
                    <label for='surname'>Cognome: </label> <input type='text' id='surname' placeholder='Rossi' required> <br> 
@@ -36,6 +36,39 @@
                 </form>
             </div>
         </div>
+        <div class='modal fade' id='logging' role='dialog'>
+        <div class='modal-dialog'>
+            <div class='modal-content' id='loginPage'>
+                <div class='modal-header'>
+                    <h4 class='modal-title'>Login</h4>
+                    <button type='button' class='close' data-dismiss='modal' id='loginClose'>&times;</button>
+                </div>
+                <div class='modal-body'>
+                    <form method='get' action='accept.html'>
+                        <label for='email'>Email: </label><input type='email' id='email' placeholder='example@example.com' required> <br>
+                        <label for='psw'>Password: </label><input type='password' id='psw' required> <br>
+                        <button type='submit' class='btn btn-light'>Accedi</button> 
+                        <button type='reset' class='btn btn-secondary'>Annulla</button> 
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id='content-body'>
+        </div>
+    </div>
     </body>
-    </html>"
+    </html>";
+    $password=$_POST["psw"];
+    $password=password_hash($password, PASSWORD_DEFAULT);
+    $_SESSION["name"]=$_POST["name"];
+    $_SESSION["surname"]=$_POST["surname"];
+    $_SESSION["email"]=$_POST["email"];
+    $_SESSION["psw"]=$password;
+    $_SESSION["codFisc"]=$_POST["codFisc"];
+    $_SESSION["address"]=$_POST["address"];
+    $_SESSION["number"]=$_POST["number"];
+    $_SESSION["cap"]=$_POST["cap"];
+
+
+
 ?>
