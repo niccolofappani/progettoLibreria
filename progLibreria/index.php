@@ -13,7 +13,7 @@
     <div id="background"></div>
 
     <div id="container">
-        <img id="logo" src="img/libro.png" alt="libro">
+        <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
 
         <div id="top">
             <label id="title">Libreria di Scandicci</label>
@@ -25,7 +25,7 @@
             
         <div id="buttons">
             <h3>
-                <input type="button" class="btn btn-warning" id="login" value="Login" data-toggle="modal" data-target="#logging"></input> 
+                <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
                 <input type="button" class="btn btn-warning" id="signUp" value="Registrati" onclick="document.location='SignUp.php'"></input>
                 <button id="cart"><i class="fa fa-shopping-cart"></i></button>
             </h3>
@@ -67,7 +67,7 @@
             </p>
         </div>
     </div>
-    
+<!-- 
     <div class="modal fade" id="logging" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" id="loginPage">
@@ -88,5 +88,6 @@
         <div id="content-body">
         </div>
     </div>
+-->
 </body>
 </html>
