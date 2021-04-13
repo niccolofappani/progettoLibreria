@@ -1,4 +1,5 @@
 <?php
+    error_reporting(0);
     session_start();
     echo "<html>
     <head>
@@ -13,25 +14,53 @@
     </head>
     <body>
         <div id='background'></div>
+
         <div id='container'>
-            <div id='Image'>
-                <img id='logo' src='img/libro.png' alt='libro'>
-            </div>
+            <a href=index.php><img id='logo' src='img/libro.png' alt='libro'></a>
+
+            <div id='top'>
+                    <label id='title'>Libreria di Scandicci</label>
+                </div>
+
             <div id='buttons'>
                 <h3><input type='button' class='btn btn-warning' id='login' value='Login' onclick='document.location='login.php''></input> 
                 <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
             </div>
             
-                <form id='formRegistrazione' method='post' action='registered.php'>
-                   <h1>Registrazione</h1>
-                   <label for='name'>Nome: </label> <input type='text' id='name' placeholder='Mario' required> <br>
-                   <label for='surname'>Cognome: </label> <input type='text' id='surname' placeholder='Rossi' required> <br> 
-                   <label for='email'>E-mail: </label> <input type='email' id='email' placeholder='example@gmail.com' required> <br>
-                   <label for='psw'>Password: </label> <input type='password' id='psw' placeholder='******' required> <br>
-                   <label for='codFisc'>Codice Fiscale: </label> <input type='text' id='codFisc' required> <br>
-                   <label for='address'>Via: </label> <input type='text' id='address'> <br>
-                   <label for='number'>Numero Civico: </label> <input type='number' id='number' min='1'> <br>
-                   <label for='cap'>Codice Postale: </label> <input type='number' id='cap' placeholder='12345'> <br>
+                <form>
+                <div class='form-group'>
+                    <label>Nome</label>
+                    <input type='text' class='form-control w-50' placeholder='Nome' required>
+                </div>
+                <div class='form-group'>
+                    <label>Cognome</label>
+                    <input type='text' class='form-control w-50' placeholder='Cognome' required>
+                </div>
+                <div class='form-group'>
+                    <label for='exampleInputEmail1'>Email</label>
+                    <input type='email' class='form-control w-50' id='exampleInputEmail1' placeholder='E-mail' required>
+                </div>
+                <div class='form-group'>
+                    <label for='exampleInputPassword1'>Password</label>
+                    <input type='password' class='form-control w-50' id='exampleInputPassword1' placeholder='Password' required>
+                </div>
+                <div class='form-group'>
+                    <label>Data di nascita</label>
+                    <input type='date' class='form-control w-50' required>
+                </div>
+                <div class='form-group'>
+                    <label>Codice Fiscale</label>
+                    <input type='text' class='form-control w-50' placeholder='Codice Fiscale' required>
+                </div>
+                <div class='form-group'>
+                    <label>Indirizzo</label>
+                    <input type='text' class='form-control w-50' placeholder='Indirizzo' required>
+                </div>
+                <div class='form-group'>
+                    <label>Codice Postale</label>
+                    <input type='number' class='form-control w-50' placeholder='Codice Postale' required>
+                </div>
+                <button type='submit' class='btn btn-primary'>Submit</button>
                 </form>
             </div>
         </div>
@@ -67,7 +96,4 @@
     $_SESSION["address"]=$_POST["address"];
     $_SESSION["number"]=$_POST["number"];
     $_SESSION["cap"]=$_POST["cap"];
-
-
-
 ?>
