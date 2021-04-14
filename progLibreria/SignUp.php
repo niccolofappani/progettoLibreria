@@ -23,42 +23,46 @@
                 </div>
 
             <div id='buttons'>
-                <h3><input type='button' class='btn btn-warning' id='login' value='Login' onclick='document.location='login.php''></input> 
+                <h3><input type='button' class='btn btn-warning' id='login' value='Login' onclick='document.location='login.php''></input>
                 <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
             </div>
             
-                <form>
+                <form method='post' action='registered.php'>
                 <div class='form-group'>
                     <label>Nome</label>
-                    <input type='text' class='form-control w-50' placeholder='Nome' required>
+                    <input type='text' class='form-control w-50' placeholder='Nome' required name='nome'>
                 </div>
                 <div class='form-group'>
                     <label>Cognome</label>
-                    <input type='text' class='form-control w-50' placeholder='Cognome' required>
+                    <input type='text' class='form-control w-50' placeholder='Cognome' required name='cognome'>
                 </div>
                 <div class='form-group'>
                     <label for='exampleInputEmail1'>Email</label>
-                    <input type='email' class='form-control w-50' id='exampleInputEmail1' placeholder='E-mail' required>
+                    <input type='email' class='form-control w-50' id='exampleInputEmail1' placeholder='E-mail' required name='email'>
                 </div>
                 <div class='form-group'>
                     <label for='exampleInputPassword1'>Password</label>
-                    <input type='password' class='form-control w-50' id='exampleInputPassword1' placeholder='Password' required>
-                </div>
-                <div class='form-group'>
-                    <label>Data di nascita</label>
-                    <input type='date' class='form-control w-50' required>
+                    <input type='password' class='form-control w-50' id='exampleInputPassword1' placeholder='Password' required name='psw'>
                 </div>
                 <div class='form-group'>
                     <label>Codice Fiscale</label>
-                    <input type='text' class='form-control w-50' placeholder='Codice Fiscale' required>
+                    <input type='text' class='form-control w-50' placeholder='Codice Fiscale' required name='codFisc'>
                 </div>
                 <div class='form-group'>
                     <label>Indirizzo</label>
-                    <input type='text' class='form-control w-50' placeholder='Indirizzo' required>
+                    <input type='text' class='form-control w-50' placeholder='Indirizzo' required name='indirizzo'>
+                </div>
+                <div class='form-group'>
+                    <label>Numero Civico</label>
+                    <input type='number' class='form-control w-50' placeholder='Numero Civico' required name='numeroCivico'>
                 </div>
                 <div class='form-group'>
                     <label>Codice Postale</label>
-                    <input type='number' class='form-control w-50' placeholder='Codice Postale' required>
+                    <input type='number' class='form-control w-50' placeholder='Codice Postale' required name='CAP'>
+                </div>
+                <div class='form-group'>
+                    <label>Città</label>
+                    <input type='text' class='form-control w-50' placeholder='Città' required name='citta'>
                 </div>
                 <button type='submit' class='btn btn-primary'>Submit</button>
                 </form>
@@ -86,14 +90,16 @@
     </div>
     </body>
     </html>";
-    $password=$_POST["psw"];
-    $password=password_hash($password, PASSWORD_DEFAULT);
-    $_SESSION["name"]=$_POST["name"];
-    $_SESSION["surname"]=$_POST["surname"];
-    $_SESSION["email"]=$_POST["email"];
-    $_SESSION["psw"]=$password;
-    $_SESSION["codFisc"]=$_POST["codFisc"];
-    $_SESSION["address"]=$_POST["address"];
-    $_SESSION["number"]=$_POST["number"];
-    $_SESSION["cap"]=$_POST["cap"];
+    extract($_POST);
+    
+    //$password=password_hash($password);
+    $_SESSION["nome"]=$nome;
+    $_SESSION["cognome"]=$cognome;
+    $_SESSION["email"]=$email;
+    $_SESSION["psw"]=$psw;
+    $_SESSION["codFisc"]=$codFisc;
+    $_SESSION["indirizzo"]=$indirizzo;
+    $_SESSION["numeroCivico"]=$numeroCivico;
+    $_SESSION["CAP"]=$CAP;
+    $_SESSION["citta"]=$citta;
 ?>

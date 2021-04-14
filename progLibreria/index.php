@@ -67,27 +67,5 @@
             </p>
         </div>
     </div>
-<!-- 
-    <div class="modal fade" id="logging" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content" id="loginPage">
-                <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal" id="loginClose">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form method="get" action="accept.html">
-                        <label for="email">Email: </label><input type="email" id="email" placeholder="example@example.com" required> <br>
-                        <label for="psw">Password: </label><input type="password" id="psw" required> <br>
-                        <button type="submit" class="btn btn-light">Accedi</button> 
-                        <button type="reset" class="btn btn-secondary">Annulla</button> 
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id="content-body">
-        </div>
-    </div>
--->
 </body>
 </html>
