@@ -7,6 +7,9 @@
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.3
 
+CREATE DATABASE Libreria;
+USE Libreria;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;

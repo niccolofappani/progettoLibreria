@@ -12,7 +12,6 @@
         </div>
             <div id='container'>
                 <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
-                
                 <div id="top">
                     <label id="title">Libreria di Scandicci</label>
                 </div>
@@ -22,7 +21,7 @@
                     <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
                 </div>
 
-                <form>
+                <form method="post" action="checklogin.php">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control w-50" id="exampleInputEmail1" placeholder="Enter email">
@@ -32,7 +31,7 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control w-50" id="exampleInputPassword1" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Accedi</button>
                 </form>
             </div>
     </body>

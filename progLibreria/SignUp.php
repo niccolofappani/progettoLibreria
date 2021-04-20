@@ -1,7 +1,8 @@
 <?php
-    error_reporting(0);
     session_start();
-    echo "<html>
+?>
+
+<html>
     <head>
         <title>Registrazione</title>
         <link rel='stylesheet' href='styles.css'  type='text/css'>
@@ -23,11 +24,11 @@
                 </div>
 
             <div id='buttons'>
-                <h3><input type='button' class='btn btn-warning' id='login' value='Login' onclick='document.location='login.php''></input>
-                <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
+            <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
+                <button id='cart'><i class='fa fa-shopping-cart'></i></button>
             </div>
             
-                <form method='post' action='registered.php'>
+                <form method='post' id='signup'>
                 <div class='form-group'>
                     <label>Nome</label>
                     <input type='text' class='form-control w-50' placeholder='Nome' required name='nome'>
@@ -42,11 +43,11 @@
                 </div>
                 <div class='form-group'>
                     <label for='exampleInputPassword1'>Password</label>
-                    <input type='password' class='form-control w-50' id='exampleInputPassword1' placeholder='Password' required name='psw'>
+                    <input type='password' class='form-control w-50' id='exampleInputPassword1' placeholder='Password' required name='psw' minlength="8">
                 </div>
                 <div class='form-group'>
                     <label>Codice Fiscale</label>
-                    <input type='text' class='form-control w-50' placeholder='Codice Fiscale' required name='codFisc'>
+                    <input type='text' class='form-control w-50' placeholder='Codice Fiscale' required name='codFisc' pattern="^[a-zA-Z]{6}[0-9]{2}[a-zA-Z][0-9]{2}[a-zA-Z][0-9]{3}[a-zA-Z]$">
                 </div>
                 <div class='form-group'>
                     <label>Indirizzo</label>
@@ -64,42 +65,44 @@
                     <label>Città</label>
                     <input type='text' class='form-control w-50' placeholder='Città' required name='citta'>
                 </div>
-                <button type='submit' class='btn btn-primary'>Submit</button>
+                <button type='submit' class='btn btn-primary'>Registrati</button>
                 </form>
             </div>
         </div>
-        <div class='modal fade' id='logging' role='dialog'>
-        <div class='modal-dialog'>
-            <div class='modal-content' id='loginPage'>
-                <div class='modal-header'>
-                    <h4 class='modal-title'>Login</h4>
-                    <button type='button' class='close' data-dismiss='modal' id='loginClose'>&times;</button>
-                </div>
-                <div class='modal-body'>
-                    <form method='get' action='accept.html'>
-                        <label for='email'>Email: </label><input type='email' id='email' placeholder='example@example.com' required> <br>
-                        <label for='psw'>Password: </label><input type='password' id='psw' required> <br>
-                        <button type='submit' class='btn btn-light'>Accedi</button> 
-                        <button type='reset' class='btn btn-secondary'>Annulla</button> 
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div id='content-body'>
-        </div>
-    </div>
     </body>
-    </html>";
-    extract($_POST);
-    
-    //$password=password_hash($password);
-    $_SESSION["nome"]=$nome;
-    $_SESSION["cognome"]=$cognome;
-    $_SESSION["email"]=$email;
-    $_SESSION["psw"]=$psw;
-    $_SESSION["codFisc"]=$codFisc;
-    $_SESSION["indirizzo"]=$indirizzo;
-    $_SESSION["numeroCivico"]=$numeroCivico;
-    $_SESSION["CAP"]=$CAP;
-    $_SESSION["citta"]=$citta;
-?>
+</html>
+
+<script>
+	$('#signup').submit(function(e){
+		e.preventDefault()
+		$('#signup button[type="submit"]').attr('disabled',true).html('Saving...');
+		if($(this).find('.alert-danger').length > 0 )
+			$(this).find('.alert-danger').remove();
+		$.ajax({
+			url:'ajax.php?action=signup',
+			method:'POST',
+			data:$(this).serialize(),
+			error:err=>{
+				console.log(err)
+		        $('#signup button[type="submit"]').removeAttr('disabled').html('Create');
+            },
+			success:function(resp){
+				if(resp == 1){
+					alert("Registrazione effettuata!")
+                        setTimeout(function(){
+                            location.replace('index.php')
+                        },1500)
+					<?php session_destroy()?>
+                    location.href ='index.php';
+                }
+                else{
+                    alert("Errore, Email o Codice Fiscale già utilizzati!");
+                        setTimeout(function(){
+                            location.replace('SignUp.php')
+                        },1500)
+                    location.href ='SignUp.php';
+                }
+			}
+		})
+	})
+</script>
