@@ -21,18 +21,54 @@
                     <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
                 </div>
 
-                <form method="post" action="checklogin.php">
+                <form method="post" action="login.php?checkLogin()">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control w-50" id="exampleInputEmail1" placeholder="Enter email">
+                        <input type="email" class="form-control w-50" id="email" name="email" placeholder="Enter email">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control w-50" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control w-50" id="psw" name="psw" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Accedi</button>
                 </form>
             </div>
     </body>
 </html>
+
+<?php 
+    function checkLogin(){  //TODO: finire il checkLogin e eliminare checkLogin.php
+        $host = "127.0.0.1";
+        $user = "root";
+        $pass = "";
+        $db = "libreria";
+        $connessione = mysqli_connect($host, $user, $pass, $db) or die("Connessione non riuscita".mysqli_connect_error());
+        $sql = "SELECT * FROM Utente WHERE Email = '" . $_POST['email'] . "';";
+        $result = mysqli_query($connessione, $sql);
+        $array[0] = mysqli_fetch_array($result);
+        if (mysqli_num_rows($result) != 0) {
+            if(strcmp($array[0]['Psw'],  $_POST['psw']) == 0){
+                echo '<script>alert("Login effettuato");
+                setTimeout(function(){
+                    location.replace("index.php")
+                },1500)
+                location.href ="index.php";</script>';
+                }
+            else{
+                echo '<script>alert("Errore, Password errata");
+                setTimeout(function(){
+                    location.replace("login.php")
+                },1500)
+                location.href ="login.php";</script>';
+            }
+        }else{
+            echo '<script>alert("Errore, Email non registrata");
+            setTimeout(function(){
+                location.replace("login.php")
+            },1500)
+            location.href ="login.php";</script>';
+        }
+        mysqli_close($connessione) or die("Chiusura connessione fallita".mysqli_error($connessione));
+    }
+?>
