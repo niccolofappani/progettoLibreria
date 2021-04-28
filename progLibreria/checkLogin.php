@@ -9,7 +9,14 @@
     $result = mysqli_query($connessione, $sql);
     $array[0] = mysqli_fetch_array($result);
     if (mysqli_num_rows($result) != 0) {
-        if(strcmp($array[0]['Psw'],  $_POST['psw']) == 0){
+        if($_POST["email"] == "admin@gmail.com" && $_POST["psw"] == "admin"){
+            echo'<script>alert("Ciao mauro");
+            setTimeout(function(){
+                location.replace("admin.php")
+            },1500)
+            location.href ="admin.php";</script>';
+        }
+        else if(strcmp($array[0]['Psw'],  $_POST['psw']) == 0){
             echo '<script>alert("Login effettuato");
             setTimeout(function(){
                 location.replace("index.php")
