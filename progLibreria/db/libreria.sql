@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 -- Struttura della tabella `autore`
 --
 
-CREATE TABLE `autore` (
+CREATE TABLE `Autore` (
   `Codice` int(11) NOT NULL,
   `Nome` varchar(50) NOT NULL,
   `Cognome` varchar(50) NOT NULL,
@@ -45,7 +45,8 @@ CREATE TABLE `autore` (
 -- Struttura della tabella `libro`
 --
 
-CREATE TABLE `libro` (
+CREATE TABLE `Libro` (
+  `ID` varchar(100) NOT NULL,
   `ISBN` varchar(100) NOT NULL,
   `Titolo` varchar(100) NOT NULL,
   `Categoria` varchar(50) NOT NULL,
@@ -53,16 +54,53 @@ CREATE TABLE `libro` (
   `Copie` int(11) NOT NULL,
   `NumeroPagine` int(11) NOT NULL,
   `Lingua` varchar(20) NOT NULL,
-  `CodAutore` int(11) NOT NULL
+  `CodAutore` int(11) NOT NULL,
+  `Prezzo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `libro da vendere`
+--
+
+CREATE TABLE `LibroVendita` (
+  `ID` varchar(100) NOT NULL,
+  `Quantita` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `libro da prestare`
+--
+
+CREATE TABLE `Prestito` (
+  `ID` int(100) NOT NULL,
+  `IDutente` int(100) NOT NULL,
+  `IDlibroUsato` int(100) NOT NULL,
+  `DataInizio` date NOT NULL,
+  `DataFine` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `libro usato`
+--
+
+CREATE TABLE `LibroUsato` (
+  `ID` varchar(100) NOT NULL,
+  `Prezzo` int(11) NOT NULL,
+  `Quantita` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- --------------------------------------------------------
 
 --
 -- Struttura della tabella `utente`
 --
 
-CREATE TABLE `utente` (
+CREATE TABLE `Utente` (
   `CodFiscale` varchar(100) NOT NULL,
   `Nome` varchar(50) NOT NULL,
   `Cognome` varchar(50) NOT NULL,
@@ -74,6 +112,12 @@ CREATE TABLE `utente` (
   `Citta` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `Vendite`(
+  `ID` int(100) NOT NULL,
+  `IDutente` int(100) NOT NULL,
+  `IDlibroVendita` int(100) NOT NULL,
+  `DataAcquisto` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Indici per le tabelle scaricate
 --
@@ -81,21 +125,48 @@ CREATE TABLE `utente` (
 --
 -- Indici per le tabelle `autore`
 --
-ALTER TABLE `autore`
+ALTER TABLE `Autore`
   ADD PRIMARY KEY (`Codice`);
+
 
 --
 -- Indici per le tabelle `libro`
 --
-ALTER TABLE `libro`
-  ADD PRIMARY KEY (`ISBN`);
+ALTER TABLE `LibroVendita`
+  ADD PRIMARY KEY (`ID`),
+  ADD FOREIGN KEY (IDlibro) REFERENCES libro(ID);
 
+--
+-- Indici per le tabelle `libro`
+--
+ALTER TABLE `Prestito`
+  ADD PRIMARY KEY (`ID`),
+  ADD FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  ADD FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(ID);
+--
+-- Indici per le tabelle `libro`
+--
+ALTER TABLE `LibroUsato`
+  ADD PRIMARY KEY (`ID`),
+  ADD FOREIGN KEY (ID) REFERENCES libro(ID);
+  
 --
 -- Indici per le tabelle `utente`
 --
-ALTER TABLE `utente`
+
+ALTER TABLE `Utente`
   ADD PRIMARY KEY (`CodFiscale`);
 COMMIT;
+
+--
+-- Indici per le tabelle `vendite`
+--
+
+ALTER TABLE `Vendite`
+  ADD PRIMARY KEY (`ID`),
+  ADD FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  ADD FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(ID);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
