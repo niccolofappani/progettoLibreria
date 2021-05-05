@@ -1,0 +1,55 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+}
+div {
+	margin: auto;	
+  	width: 1000px;
+	background-color: white;
+  	padding: 5px;
+    border-radius: 5px;
+}
+#title{
+    font-size: 22px;
+	color: white;
+    font-weight: bold;
+}
+#add{
+    width: fit-content;
+	height: fit-content;	
+	background-color: green;
+  	color: white;
+  	font-size: 20px;
+    float: right;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+#delete{
+    width: fit-content;
+	height: fit-content;	
+	background-color: red;
+  	color: white;
+  	font-size: 20px;
+    float: right;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+#bluebox {
+	background-color: rgb(0, 0, 99);
+}
+#whitebox {
+    background-color: white;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    text-align: left;
+    padding: 8px;
+}
+#form {
+    padding-top:10%;
+    padding-left: 35%;
+}

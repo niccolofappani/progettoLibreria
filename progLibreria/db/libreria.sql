@@ -10,10 +10,6 @@
 CREATE DATABASE Libreria;
 USE Libreria;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -22,192 +18,144 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `Libreria`
+-- Database: Libreria
 --
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Autore`
+-- Struttura della tabella Autore
 --
 
-CREATE TABLE `Autore` (
-  `Codice` int NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Cognome` varchar(50) NOT NULL,
-  `DataNascita` date NOT NULL,
-  `Nazionalità` varchar(50) NOT NULL
+CREATE TABLE Autore (
+  ID int NOT NULL AUTO_INCREMENT,
+  Nome varchar(50) NOT NULL,
+  Cognome varchar(50) NOT NULL,
+  DataNascita date NOT NULL,
+  Nazionalità varchar(50) NOT NULL,
+  PRIMARY KEY (ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Libro`
+-- Struttura della tabella Libro
 --
 
-CREATE TABLE `Libro` (
-  `ID` varchar(100) NOT NULL,
-  `ISBN10` int NOT NULL,
-  `Titolo` varchar(100) NOT NULL,
-  `Genere` varchar(50) NOT NULL,
-  `CasaEditrice` varchar(50) NOT NULL,
-  `NumeroPagine` int NOT NULL,
-  `Lingua` varchar(20) NOT NULL,
-  `Prezzo` float NOT NULL,
-  `CodAutore` int NOT NULL
+CREATE TABLE Libro (
+  ID int NOT NULL AUTO_INCREMENT,
+  ISBN10 varchar(100) NOT NULL,
+  Titolo varchar(100) NOT NULL,
+  Genere varchar(50) NOT NULL,
+  CasaEditrice varchar(50) NOT NULL,
+  NumeroPagine int NOT NULL,
+  Lingua varchar(20) NOT NULL,
+  Prezzo float NOT NULL,
+  CodAutore int NOT NULL,
+   PRIMARY KEY (ID),
+   FOREIGN KEY (CodAutore) REFERENCES Autore(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Libro da vendere`
+-- Struttura della tabella Libro da vendere
 --
 
-CREATE TABLE `LibroVendita` (
-  `ID` varchar(100) NOT NULL,
-  `Quantita` int(11) NOT NULL
+CREATE TABLE LibroVendita (
+  ID int NOT NULL,
+  Quantita int NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES Libro(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Libro da prestare`
+-- Struttura della tabella libro usato
 --
 
-CREATE TABLE `Prestito` (
-  `ID` int NOT NULL,
-  `IDutente` int NOT NULL,
-  `IDlibroUsato` int NOT NULL,
-  `DataInizio` date NOT NULL,
-  `DataFine` date NOT NULL
+CREATE TABLE LibroUsato (
+  ID int NOT NULL,
+  Prezzo float NOT NULL,
+  Quantita int NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID) REFERENCES Libro(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `libro usato`
+-- Struttura della tabella Utente
 --
 
-CREATE TABLE `LibroUsato` (
-  `ID` varchar(100) NOT NULL,
-  `Prezzo` int NOT NULL,
-  `Quantita` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
--- --------------------------------------------------------
-
---
--- Struttura della tabella `Utente`
---
-
-CREATE TABLE `Utente` (
-  `CodFiscale` varchar(100) NOT NULL,
-  `Nome` varchar(50) NOT NULL,
-  `Cognome` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Psw` varchar(500) NOT NULL,
-  `Via` varchar(50) NOT NULL,
-  `NumeroCivico` varchar(10) NOT NULL,
-  `CAP` varchar(20) NOT NULL,
-  `Citta` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
--- --------------------------------------------------------
-
---
--- Struttura della tabella `Vendite`
---
-
-CREATE TABLE `Vendite`(
-  `ID` int NOT NULL,
-  `IDutente` int NOT NULL,
-  `IDlibroVendita` int NOT NULL,
-  `DataAcquisto` date NOT NULL
+CREATE TABLE Utente (
+  CodFiscale varchar(100) NOT NULL,
+  Nome varchar(50) NOT NULL,
+  Cognome varchar(50) NOT NULL,
+  Email varchar(100) NOT NULL,
+  Psw varchar(500) NOT NULL,
+  Via varchar(50) NOT NULL,
+  NumeroCivico varchar(10) NOT NULL,
+  CAP varchar(20) NOT NULL,
+  Citta varchar(50) NOT NULL,
+  PRIMARY KEY (CodFiscale)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
--- --------------------------------------------------------
--- --------------------------------------------------------
 
 --
--- Indici per le tabelle scaricate
+-- Struttura della tabella Libro da prestare
 --
 
--- --------------------------------------------------------
---
--- Indici per le tabelle `Autore`
---
-ALTER TABLE `Autore`
-  ADD PRIMARY KEY (`Codice`);
-
--- --------------------------------------------------------
---
--- Indici per le tabelle `Libro`
---
-ALTER TABLE `Libro`
-  ADD PRIMARY KEY (`ID`);
-  ADD FOREIGN KEY (CodAutore) REFERENCES Autore(Codice);
--- --------------------------------------------------------
-
---
--- Indici per le tabelle `LibroVendita`
---
-ALTER TABLE `LibroVendita`
-  ADD PRIMARY KEY (`ID`),
-  ADD FOREIGN KEY (IDlibro) REFERENCES Libro(ID);
+CREATE TABLE Prestito (
+  ID int NOT NULL AUTO_INCREMENT,
+  IDutente varchar(100) NOT NULL,
+  IDlibroUsato int NOT NULL,
+  DataInizio date NOT NULL,
+  DataFine date NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Indici per le tabelle `Prestito`
---
-ALTER TABLE `Prestito`
-  ADD PRIMARY KEY (`ID`),
-  ADD FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  ADD FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(ID);
-
--- --------------------------------------------------------
-
---
--- Indici per le tabelle `LibroUsato`
---
-ALTER TABLE `LibroUsato`
-  ADD PRIMARY KEY (`ID`),
-  ADD FOREIGN KEY (ID) REFERENCES Libro(ID);
-
--- --------------------------------------------------------
-
---
--- Indici per le tabelle `Utente`
+-- Struttura della tabella Vendite
 --
 
-ALTER TABLE `Utente`
-  ADD PRIMARY KEY (`CodFiscale`);
-COMMIT;
+CREATE TABLE Vendite(
+  ID int NOT NULL AUTO_INCREMENT,
+  IDutente varchar(100) NOT NULL,
+  IDlibroVendita int NOT NULL,
+  DataAcquisto date NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- Indici per le tabelle `Vendite`
---
-
-ALTER TABLE `Vendite`
-  ADD PRIMARY KEY (`ID`),
-  ADD FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  ADD FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(ID);
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
+--
+-- Inserimenti tabella Autore
+--
 
-INSERT INTO Autore(Codice, Nome, Cognome, DataNascita, Nazionalità)
-  VALUES(1, 'Franz', 'Kafka', '1883-07-03', 'Repubblica Ceca'),
-  (2, 'Italo', 'Calvino', '1923-10-15', 'Italia'),
-  (3, 'George', 'Orwell', '1903-06-25', 'Inghilterra'),
-  (4, 'Harper', 'Lee', '1926-04-28', 'Stati Uniti'),
-  (5, 'Luigi', 'Pirandello', '1867-06-28', 'Italia');
+INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
+  VALUES('Franz', 'Kafka', '1883-07-03', 'Repubblica Ceca'),
+  ('Italo', 'Calvino', '1923-10-15', 'Italia'),
+  ('George', 'Orwell', '1903-06-25', 'Inghilterra'),
+  ('Harper', 'Lee', '1926-04-28', 'Stati Uniti'),
+  ('Luigi', 'Pirandello', '1867-06-28', 'Italia');
+
+-- --------------------------------------------------------
+
+--
+-- Inserimenti tabella Libro
+--
 
 INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, Prezzo, CodAutore)
   VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 8.55, 1),

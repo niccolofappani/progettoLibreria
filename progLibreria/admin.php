@@ -9,10 +9,10 @@
         <center>
             <h1>Pagina di amministrazione</h1>
             <div>
-                <h3>Azioni da amministratore</h3>ù
+                <h3>Azioni da amministratore</h3>
                 <form method="get" action="getQuery.php">
                   <p>Visualizza lista libri</p>
-                  <button type="submit">Aggiorna</button>
+                  <button type="submit">Visualizza</button>
                 </form>
                 <form method="post" action="insert.php">
                   <p>Inserisci libri</p>

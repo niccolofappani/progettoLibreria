@@ -10,7 +10,7 @@
     $array[0] = mysqli_fetch_array($result);
     if (mysqli_num_rows($result) != 0) {
         if($_POST["email"] == "admin@gmail.com" && $_POST["psw"] == "admin"){
-            echo'<script>alert("Ciao mauro");
+            echo'<script>alert("Benvenuto nella sezione amministrazione");
             setTimeout(function(){
                 location.replace("admin.php")
             },1500)
