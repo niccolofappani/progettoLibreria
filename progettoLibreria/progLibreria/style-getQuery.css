@@ -1,0 +1,73 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+}
+
+div {
+	margin: auto;	
+  	width: 1000px;
+	background-color: white;
+  	padding: 5px;
+    border-radius: 5px;
+}
+
+#title{
+    font-size: 22px;
+	color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.edit{
+    width: fit-content;
+	height: fit-content;	
+	background-color: green;
+  	color: white;
+  	font-size: 20px;
+    float: right;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.delete{
+    width: fit-content;
+	height: fit-content;	
+	background-color: red;
+  	color: white;
+  	font-size: 20px;
+    float: right;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+#bluebox {
+	background-color: rgb(0, 0, 99);
+    width: 100%;
+    text-align: right;
+}
+
+#whitebox {
+    background-color: white;
+}
+
+tr, td, th {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+#tabellaDB{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid black;
+}
+
+#adminButton{
+    text-align:right;
+}
+
+#form {
+    padding-top:10%;
+    padding-left: 35%;
+}
