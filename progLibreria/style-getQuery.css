@@ -2,6 +2,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: lightgray;
 }
+
 div {
 	margin: auto;	
   	width: 1000px;
@@ -9,12 +10,15 @@ div {
   	padding: 5px;
     border-radius: 5px;
 }
+
 #title{
     font-size: 22px;
 	color: white;
     font-weight: bold;
+    text-align: center;
 }
-#add{
+
+.edit{
     width: fit-content;
 	height: fit-content;	
 	background-color: green;
@@ -24,7 +28,8 @@ div {
     margin-right: 20px;
     border-radius: 5px;
 }
-#delete{
+
+.delete{
     width: fit-content;
 	height: fit-content;	
 	background-color: red;
@@ -34,21 +39,34 @@ div {
     margin-right: 15px;
     border-radius: 5px;
 }
+
 #bluebox {
 	background-color: rgb(0, 0, 99);
+    width: 100%;
+    text-align: right;
 }
+
 #whitebox {
     background-color: white;
 }
-table {
+
+tr, td, th {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+}
+
+#tabellaDB{
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    border: 1px solid black;
 }
-td, th {
-    text-align: left;
-    padding: 8px;
+
+#adminButton{
+    text-align:right;
 }
+
 #form {
     padding-top:10%;
     padding-left: 35%;

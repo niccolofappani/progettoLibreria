@@ -63,10 +63,10 @@ CREATE TABLE Libro (
 --
 
 CREATE TABLE LibroVendita (
-  ID int NOT NULL,
-  Quantita int NOT NULL,
-  PRIMARY KEY (ID),
-  FOREIGN KEY (ID) REFERENCES Libro(ID)
+  IDVendita int NOT NULL,
+  QuantitaVendita int NOT NULL,
+  PRIMARY KEY (IDVendita),
+  FOREIGN KEY (IDVendita) REFERENCES Libro(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -76,11 +76,11 @@ CREATE TABLE LibroVendita (
 --
 
 CREATE TABLE LibroUsato (
-  ID int NOT NULL,
-  Prezzo float NOT NULL,
-  Quantita int NOT NULL,
-  PRIMARY KEY (ID),
-  FOREIGN KEY (ID) REFERENCES Libro(ID)
+  IDusato int NOT NULL,
+  PrezzoUsato float NOT NULL,
+  QuantitaUsato int NOT NULL,
+  PRIMARY KEY (IDUsato),
+  FOREIGN KEY (IDusato) REFERENCES Libro(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -116,7 +116,7 @@ CREATE TABLE Prestito (
   DataFine date NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(ID)
+  FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(IDUsato)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -132,7 +132,7 @@ CREATE TABLE Vendite(
   DataAcquisto date NOT NULL,
   PRIMARY KEY (ID),
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(ID)
+  FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(IDVendita)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -149,7 +149,8 @@ INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
   ('Italo', 'Calvino', '1923-10-15', 'Italia'),
   ('George', 'Orwell', '1903-06-25', 'Inghilterra'),
   ('Harper', 'Lee', '1926-04-28', 'Stati Uniti'),
-  ('Luigi', 'Pirandello', '1867-06-28', 'Italia');
+  ('Luigi', 'Pirandello', '1867-06-28', 'Italia'),
+ ('Lucinda', 'Riley', '1966-02-14', 'Irlanda del Nord');
 
 -- --------------------------------------------------------
 
@@ -164,4 +165,45 @@ INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, Pr
   (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 9.50, 4),
   (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 9.50, 3),
   (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 9.50, 5),
-  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 7.60, 5);
+  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 7.60, 5),
+  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 18.81, 6);
+  
+-- --------------------------------------------------------
+
+--
+-- Inserimenti tabella Utente
+--
+  INSERT INTO Utente(CodFiscale, Nome, Cognome, Email, Psw, Via, NumeroCivico, CAP, Citta)
+  VALUES ('.', 'Admin', '.', 'admin@gmail.com', 'admin', '.', '.', '.', '.');
+
+-- --------------------------------------------------------
+
+--
+-- Inserimenti tabella LibroVendita
+--
+
+INSERT INTO LibroVendita (IDVendita, QuantitaVendita)
+  VALUES (1, 5),
+  (2, 11),
+  (3, 24),
+  (4, 1),
+  (5, 1),
+  (6, 20),
+  (7, 0),
+  (8, 70);
+
+-- --------------------------------------------------------
+
+--
+-- Inserimenti tabella LibroUsato
+--
+
+INSERT INTO LibroUsato (IDUsato, PrezzoUsato, QuantitaUsato)
+  VALUES (1, 4.28, 3),
+  (2, 6, 2),
+  (3, 5.7, 4),
+  (4, 4.75, 1),
+  (5, 4.75, 7),
+  (6, 4.75, 0),
+  (7, 3.8, 15),
+  (8, 9.4, 0);

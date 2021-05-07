@@ -19,10 +19,7 @@
                   <button>Invio</button>
                 </form>
 
-                <p>Modifica libro</p>
-                <button>Modifica</button>
-                <p>Elimina libro</p>
-                <button>Elimina</button>
+              
             </div>
         </center>
     </body>
