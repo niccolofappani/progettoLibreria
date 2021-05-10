@@ -7,7 +7,15 @@
     if ($conn->connect_error) { //fallimento della connessione
       die("Connection failed: " . $conn->connect_error);
     }
+
+    $sql = "DELETE FROM libroUsato WHERE IDUsato=".$_POST['itemid'];
+    $conn->query($sql);
+
+    $sql = "DELETE FROM libroVendita WHERE IDVendita=".$_POST['itemid'];
+    $conn->query($sql);
+
+    $sql = "DELETE FROM libro WHERE IDLibro=".$_POST['itemid'];
+    $conn->query($sql);
+
     
-    echo $_GET["id"];
-    //$sql = "DELETE FROM libro WHERE libro.ID='$_GET["ID"]'";
 ?>

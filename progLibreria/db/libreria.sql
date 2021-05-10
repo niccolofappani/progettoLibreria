@@ -7,6 +7,7 @@
 -- Versione del server: 10.4.11-MariaDB
 -- Versione PHP: 7.4.3
 
+DROP DATABASE IF EXISTS Libreria;
 CREATE DATABASE Libreria;
 USE Libreria;
 
@@ -28,12 +29,12 @@ USE Libreria;
 --
 
 CREATE TABLE Autore (
-  ID int NOT NULL AUTO_INCREMENT,
+  IDAutore int NOT NULL AUTO_INCREMENT,
   Nome varchar(50) NOT NULL,
   Cognome varchar(50) NOT NULL,
   DataNascita date NOT NULL,
   Nazionalità varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+  PRIMARY KEY (IDAutore)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -43,17 +44,16 @@ CREATE TABLE Autore (
 --
 
 CREATE TABLE Libro (
-  ID int NOT NULL AUTO_INCREMENT,
+  IDLibro int NOT NULL AUTO_INCREMENT,
   ISBN10 varchar(100) NOT NULL,
   Titolo varchar(100) NOT NULL,
   Genere varchar(50) NOT NULL,
   CasaEditrice varchar(50) NOT NULL,
   NumeroPagine int NOT NULL,
   Lingua varchar(20) NOT NULL,
-  Prezzo float NOT NULL,
   CodAutore int NOT NULL,
-   PRIMARY KEY (ID),
-   FOREIGN KEY (CodAutore) REFERENCES Autore(ID)
+   PRIMARY KEY (IDLibro),
+   FOREIGN KEY (CodAutore) REFERENCES Autore(IDAutore)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,8 +65,9 @@ CREATE TABLE Libro (
 CREATE TABLE LibroVendita (
   IDVendita int NOT NULL,
   QuantitaVendita int NOT NULL,
+  Prezzo float NOT NULL,
   PRIMARY KEY (IDVendita),
-  FOREIGN KEY (IDVendita) REFERENCES Libro(ID)
+  FOREIGN KEY (IDVendita) REFERENCES Libro(IDLibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -76,11 +77,11 @@ CREATE TABLE LibroVendita (
 --
 
 CREATE TABLE LibroUsato (
-  IDusato int NOT NULL,
+  IDUsato int NOT NULL,
   PrezzoUsato float NOT NULL,
   QuantitaUsato int NOT NULL,
   PRIMARY KEY (IDUsato),
-  FOREIGN KEY (IDusato) REFERENCES Libro(ID)
+  FOREIGN KEY (IDusato) REFERENCES Libro(IDLibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -109,12 +110,12 @@ CREATE TABLE Utente (
 --
 
 CREATE TABLE Prestito (
-  ID int NOT NULL AUTO_INCREMENT,
+  IDPrestito int NOT NULL AUTO_INCREMENT,
   IDutente varchar(100) NOT NULL,
   IDlibroUsato int NOT NULL,
   DataInizio date NOT NULL,
   DataFine date NOT NULL,
-  PRIMARY KEY (ID),
+  PRIMARY KEY (IDPrestito),
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
   FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(IDUsato)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -126,15 +127,44 @@ CREATE TABLE Prestito (
 --
 
 CREATE TABLE Vendite(
-  ID int NOT NULL AUTO_INCREMENT,
+  IDVendite int NOT NULL AUTO_INCREMENT,
   IDutente varchar(100) NOT NULL,
   IDlibroVendita int NOT NULL,
   DataAcquisto date NOT NULL,
-  PRIMARY KEY (ID),
+  PRIMARY KEY (IDVendite),
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
   FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(IDVendita)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella Voto
+--
+
+CREATE TABLE Voto(
+  IDVoto int NOT NULL AUTO_INCREMENT,
+  NumeroStelle int NOT NULL,
+  PRIMARY KEY (IDVoto)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella Commento
+--
+
+CREATE TABLE Commento(
+  IDCommento int NOT NULL AUTO_INCREMENT,
+  Corpo varchar(200) NOT NULL,
+  IDVoto int NOT NULL,
+  IDUtente varchar(100) NOT NULL,
+  IDLibro int NOT NULL,
+  PRIMARY KEY (IDCommento),
+  FOREIGN KEY (IDVoto) REFERENCES Voto(IDVoto),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -158,16 +188,16 @@ INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
 -- Inserimenti tabella Libro
 --
 
-INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, Prezzo, CodAutore)
-  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 8.55, 1),
-  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 12.00, 2),
-  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 11.40, 3),
-  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 9.50, 4),
-  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 9.50, 3),
-  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 9.50, 5),
-  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 7.60, 5),
-  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 18.81, 6);
-  
+INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore)
+  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 1),
+  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2),
+  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3),
+  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4),
+  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3),
+  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5),
+  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5),
+  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6);
+
 -- --------------------------------------------------------
 
 --
@@ -182,15 +212,15 @@ INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, Pr
 -- Inserimenti tabella LibroVendita
 --
 
-INSERT INTO LibroVendita (IDVendita, QuantitaVendita)
-  VALUES (1, 5),
-  (2, 11),
-  (3, 24),
-  (4, 1),
-  (5, 1),
-  (6, 20),
-  (7, 0),
-  (8, 70);
+INSERT INTO LibroVendita (IDVendita, QuantitaVendita, Prezzo)
+  VALUES (1, 5, 8.55),
+  (2, 11, 12.00),
+  (3, 24, 11.40),
+  (4, 1, 9.50),
+  (5, 1, 9.50),
+  (6, 20, 9.50),
+  (7, 0, 7.60),
+  (8, 70, 18.81);
 
 -- --------------------------------------------------------
 
