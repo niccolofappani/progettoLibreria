@@ -168,6 +168,23 @@ CREATE TABLE Commento(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
+
+--
+-- Struttura della tabella Metodo di pagamento
+--
+
+CREATE TABLE MetodoPagamento(
+  IDMetodo int NOT NULL AUTO_INCREMENT,
+  IDUtente varchar(100) NOT NULL,
+  Tipo varchar(10),
+  NumeroCarta varchar(50) NOT NULL,
+  CVC int NOT NULL,
+  DataScadenza date NOT NULL,
+  PRIMARY KEY (IDMetodo),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
 -- --------------------------------------------------------
 -- --------------------------------------------------------
 
