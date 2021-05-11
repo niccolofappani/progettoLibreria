@@ -52,6 +52,7 @@ CREATE TABLE Libro (
   NumeroPagine int NOT NULL,
   Lingua varchar(20) NOT NULL,
   CodAutore int NOT NULL,
+  Foto varchar (300) NOT NULL,
    PRIMARY KEY (IDLibro),
    FOREIGN KEY (CodAutore) REFERENCES Autore(IDAutore)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -188,15 +189,15 @@ INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
 -- Inserimenti tabella Libro
 --
 
-INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore)
-  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 1),
-  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2),
-  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3),
-  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4),
-  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3),
-  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5),
-  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5),
-  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6);
+INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore, Foto)
+  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 1, "C:\xampp\htdocs\progLibreria\books\lametamorfosi.png"),
+  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2, "a"),
+  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3, "a"),
+  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4, "a"),
+  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3, "a"),
+  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5, "a"),
+  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5, "a"),
+  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6, "a");
 
 -- --------------------------------------------------------
 

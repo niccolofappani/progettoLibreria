@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
     </head>
     <body>
         <div id="background"></div>
@@ -32,6 +31,7 @@
                 <h3>
                     <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
                     <input type="button" class="btn btn-warning" id="signUp" value="Registrati" onclick="document.location='SignUp.php'"></input>
+                    <input type="button" class="btn btn-warning" id="catalogo" value="Catalogo" onclick="document.location='catalogo.php'"></input>
                     <button id="cart"><i class="fa fa-shopping-cart"></i></button>
                 </h3>
             </div>
@@ -39,16 +39,16 @@
             <div class="dropdown">
                 <button class="dropbtn">Genere</button>
                 <div class="dropdown-content">
-                    <a href="#">Biografia</a>
-                    <a href="#">Storico</a>
-                    <a href="#">Giallo</a>
-                    <a href="#">Thriller</a>
-                    <a href="#">Avventura</a>
-                    <a href="#">Fantascienza</a>
-                    <a href="#">Fantasy</a>
-                    <a href="#">Umorismo</a>
-                    <a href="#">Ragazzi</a>
-                </div>
+                    <a href="#" class="genere">Biografia</a>
+                    <a href="#" class="genere">Storico</a>
+                    <a href="#" class="genere">Giallo</a>
+                    <a href="#" class="genere">Thriller</a>
+                    <a href="#" class="genere">Avventura</a>
+                    <a href="#" class="genere">Fantascienza</a>
+                    <a href="#" class="genere">Fantasy</a>
+                    <a href="#" class="genere">Umorismo</a>
+                    <a href="#" class="genere">Narrativa</a>
+                </div> 
             </div>
 
             <div class="dropdown">
@@ -67,11 +67,11 @@
                     È possibile sia acquistare che prendere in prestito i libri, basta registrarsi e poi fare il 
                     login prima di compiere una delle due azioni. </br>
                     Per comprare un libro sarà necessario inserire i dati di pagamento, mentre per prenderlo 
-                    in prestito sarà necessario inserire la data d'inizio del prestito e della fine (il prestito 
-                    di un libro può durare al massimo un mese).
+                    in prestito sarà necessario inserire la data d'inizio del prestito e della fine, con un massimo di 30 giorni.
                 </p>
             </div>
         </div>
+        <script src="catalogScript.js"></script>
     </body>
 <?php 
     $conn->close() 
