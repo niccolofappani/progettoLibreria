@@ -29,7 +29,7 @@
                     <button id="cart"><i class="fa fa-shopping-cart"></i></button>
                 </h3>
             </div>
-            <div id="catalog">
+            
                 <?php
                     $servername = "localhost";
                     $username = "root";
@@ -40,25 +40,30 @@
                       die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql= "SELECT Libro.Titolo, Libro.Genere, Libro.Prezzo, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro JOIN Autore ON Libro.CodAutore = Autore.IDAutore JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita";
+                    $sql= "SELECT Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita;";
                     $result=$conn->query($sql);
                     if ($result->num_rows > 0) {
-                        echo "<div>";
-                        while($row = $result->fetch_assoc()) {
-                            echo "<div>
-                                <button type='image' src='".$row['foto']."'></button>
-                                <button type='text'>".$row['titolo']." </button> 
-                                <p>Nuovo: ".$row['prezzo']."</p>
-                            </div>";
-                        }
-                        
+                        echo "<div id='ordinamento-libri'>";
+                        $i=1;
+                            while($row = $result->fetch_assoc()) {
+                                
+                                echo "<div class='libro'>
+                                    <a href=''><img id='foto' src='".$row['Foto']."' alt='immagine'></a><br>
+                                    <a href=''>".$row['Titolo']." </a> <br>
+                                    <p>Nuovo: ".$row['Prezzo']."</p>
+                                </div>";
+                                if($i%6==0){
+                                    echo "<br>";
+                                }
+                                $i= $i +1;
+                            }
                         echo "</div>";
-                      } 
-                      else {
+                    } 
+                    else {
                         echo "Database vuoto";
-                      }
-                    
+                    }
                 ?>
-            </div>
+            
     </body>
 </html>
+
