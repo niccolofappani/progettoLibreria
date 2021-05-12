@@ -14,7 +14,7 @@
                   <p>Visualizza lista libri</p>
                   <button type="submit">Visualizza</button>
                 </form>
-                <form method="post" action="insert.php">
+                <form method="post" action="inserimento.php">
                   <p>Inserisci libri</p>
                   <button>Invio</button>
                 </form>
