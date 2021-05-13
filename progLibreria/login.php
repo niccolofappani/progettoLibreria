@@ -8,32 +8,30 @@
         <link rel="stylesheet" href="./styles.css"  type="text/css">
     </head>
     <body>
-        <div id="background">
-        </div>
-            <div id='container'>
-                <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
-                <div id="top">
-                    <label id="title">Libreria di Scandicci</label>
-                </div>
-
-                <div id='buttons'>
-                    <h3><input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick="document.location='SignUp.php'"></input>
-                    <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
-                </div>
-
-                <form method="post" action="checkLogin.php">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control w-50" id="email" name="email" placeholder="Enter email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control w-50" id="psw" name="psw" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Accedi</button>
-                </form>
+        <div id='container'>
+            <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
+            <div id="top">
+                <label id="title">Libreria di Scandicci</label>
             </div>
+
+            <div id='buttons'>
+                <h3><input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick="document.location='SignUp.php'"></input>
+                <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
+            </div>
+
+            <form method="post" action="checkLogin.php">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control w-50" id="email" name="email" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control w-50" id="psw" name="psw" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Accedi</button>
+            </form>
+        </div>
     </body>
 </html>
 

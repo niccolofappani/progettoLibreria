@@ -1,5 +1,5 @@
 <?php
-     
+     session_start();
     $host = "127.0.0.1"; //TODO: finire il checkLogin e eliminare checkLogin.php
     $user = "root";
     $pass = "";
@@ -17,6 +17,8 @@
             location.href ="admin.php";</script>';
         }
         else if(strcmp($array[0]['Psw'],  $_POST['psw']) == 0){
+            $_SESSION["logged"]=true;
+            $_SESSION["user"]=$array[0]['Nome'];
             echo '<script>alert("Login effettuato");
             setTimeout(function(){
                 location.replace("index.php")

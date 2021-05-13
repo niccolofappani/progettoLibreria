@@ -10,7 +10,6 @@
         
     </head>
     <body>
-        <div id="background"></div>
         <div id="container">
             <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
 

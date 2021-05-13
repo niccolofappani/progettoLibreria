@@ -38,7 +38,6 @@ CREATE TABLE Autore (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Libro
 --
@@ -58,7 +57,6 @@ CREATE TABLE Libro (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Libro da vendere
 --
@@ -72,7 +70,6 @@ CREATE TABLE LibroVendita (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella libro usato
 --
@@ -86,7 +83,6 @@ CREATE TABLE LibroUsato (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Utente
 --
@@ -101,11 +97,12 @@ CREATE TABLE Utente (
   NumeroCivico varchar(10) NOT NULL,
   CAP varchar(20) NOT NULL,
   Citta varchar(50) NOT NULL,
-  PRIMARY KEY (CodFiscale)
+  IDCarrello int() NOT NULL,
+  PRIMARY KEY (CodFiscale),
+  FOREIGN KEY (IDCarrello) REFERENCES Carrello(ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Libro da prestare
 --
@@ -122,7 +119,6 @@ CREATE TABLE Prestito (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Vendite
 --
@@ -138,7 +134,6 @@ CREATE TABLE Vendite(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Voto
 --
@@ -150,7 +145,6 @@ CREATE TABLE Voto(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Commento
 --
@@ -168,7 +162,6 @@ CREATE TABLE Commento(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Struttura della tabella Metodo di pagamento
 --
@@ -183,6 +176,32 @@ CREATE TABLE MetodoPagamento(
   PRIMARY KEY (IDMetodo),
   FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+--
+-- Struttura della tabella Carrello
+--
+
+CREATE TABLE Carrello(
+  IDCarrello int NOT NULL AUTO_INCREMENT,
+  IDUtente varchar(100) NOT NULL,
+  PRIMARY KEY (IDCarrello),
+  FOREIGN KEY (IDUtente) Utente(CodFiscale)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+--
+-- Struttura della tabella Carrello libri
+--
+
+CREATE TABLE CarrelloLibri(
+  IDCarrelloLibri int NOT NULL AUTO_INCREMENT,
+  IDLibro int NOT NULL,
+  Quantita int NOT NULL,
+  IDCarrello int NOT NULL,
+  PRIMARY KEY (IDCarrelloLibri),
+  FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro),
+  FOREIGN KEY (IDCarrello) REFERENCES Carrello(IDCarrello)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
