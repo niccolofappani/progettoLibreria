@@ -97,9 +97,7 @@ CREATE TABLE Utente (
   NumeroCivico varchar(10) NOT NULL,
   CAP varchar(20) NOT NULL,
   Citta varchar(50) NOT NULL,
-  IDCarrello int() NOT NULL,
-  PRIMARY KEY (CodFiscale),
-  FOREIGN KEY (IDCarrello) REFERENCES Carrello(ID)
+  PRIMARY KEY (CodFiscale)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -186,7 +184,7 @@ CREATE TABLE Carrello(
   IDCarrello int NOT NULL AUTO_INCREMENT,
   IDUtente varchar(100) NOT NULL,
   PRIMARY KEY (IDCarrello),
-  FOREIGN KEY (IDUtente) Utente(CodFiscale)
+  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Struttura della tabella Carrello libri
@@ -202,6 +200,31 @@ CREATE TABLE CarrelloLibri(
   FOREIGN KEY (IDCarrello) REFERENCES Carrello(IDCarrello)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Struttura della tabella Orders unico per ogni utente
+--
+CREATE TABLE Orders (
+  IDOrders int NOT NULL AUTO_INCREMENT,
+  IDUtente varchar(100) NOT NULL,
+  IDMetodo int NOT NULL,
+  PRIMARY KEY (IDOrders),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Struttura della tabella Ordine con i libri acquistati
+--
+
+CREATE TABLE Ordine(
+  IDOrdine int NOT NULL AUTO_INCREMENT,
+  IDOrders int NOT NULL,
+  IDLibro int NOT NULL,
+  Quantita int NOT NULL,
+  PRIMARY KEY (IDOrdine),
+  FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
+  FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 -- --------------------------------------------------------
@@ -227,13 +250,13 @@ INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
 
 INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore, Foto)
   VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 1, "C:\xampp\htdocs\progLibreria\books\lametamorfosi.png"),
-  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2, "a"),
-  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3, "a"),
-  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4, "a"),
-  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3, "a"),
-  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5, "a"),
-  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5, "a"),
-  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6, "a");
+  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2, "C:\xampp\htdocs\progLibreria\books\ilviscontedimezzato.png"),
+  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3, "C:\xampp\htdocs\progLibreria\books\1984.png"),
+  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4, "C:\xampp\htdocs\progLibreria\books\ilbuiooltrelasiepe.png"),
+  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3, "C:\xampp\htdocs\progLibreria\books\lafattoriadeglianimali.png"),
+  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5, "C:\xampp\htdocs\progLibreria\books\unonessunoecentomila.png"),
+  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5, "C:\xampp\htdocs\progLibreria\books\ilfumattiapascal.png"),
+  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6, "C:\xampp\htdocs\progLibreria\books\lasorellaperduta.png");
 
 -- --------------------------------------------------------
 

@@ -1,6 +1,6 @@
 body{
   background-color: green;
-}
+} 
 
 #top{
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -48,7 +48,7 @@ body{
   font-weight: bold;
   border: 3px solid #f1f1f1;
   position: absolute;
-  top: 5%;
+  top: 1%;
   left: 10%;
   width: 80%;
   padding: 20px;
@@ -109,6 +109,8 @@ body{
 
 #cart{
   background-color: transparent;
+  border: none;
+  outline: none;
 }
 
 input:focus{

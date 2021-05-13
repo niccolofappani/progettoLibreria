@@ -20,17 +20,15 @@
     if ($conn->connect_error) { //fallimento della connessione
       die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM Libro LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita LEFT JOIN LibroUsato ON Libro.IDLibro=LibroUsato.IDUsato"; //query del get di tutti i libri
+    $sql = "SELECT * FROM Order JOIN Ordine ON Order.IDOrder = Ordine.IDOrder"; //query del get di tutti i libri
     $result = $conn->query($sql); 
   
     if ($result->num_rows > 0) {
       echo "<table id='tabellaDB'>";
-      echo "<tr><th>ISBN</th><th>Titolo</th><th>Genere</th><th>Codice Autore</th><th>Numero Pagine</th><th>Casa Editrice</th><th>
-      Lingua</th><th>Prezzo</th><th>Prezzo Usato</th><th>Copie</th><th>Copie Usato</th></tr>";
+      echo "";
       while($row = $result->fetch_assoc()) {
-        echo "<td>" . $row["ISBN10"]. "</td><td> " . $row["Titolo"]. " </td><td> ". $row["Genere"]. " </td><td> ". $row["CodAutore"]. 
-        " </td><td>". $row["NumeroPagine"]. " </td><td> ". $row["CasaEditrice"]. " </td><td> ". $row["Lingua"]. " </td><td> ".$row["Prezzo"]. " </td><td> ".$row["PrezzoUsato"]." </td><td>". $row["QuantitaVendita"]. " </td><td>".$row["QuantitaUsato"]."</td><td><button class='edit' type='button'>Modifica ✏</button></td><td><button id='".$row["IDLibro"]."' class='delete' 'type='button' >Elimina 🚮</button></td></tr>";
-      }
+        echo "";
+    }
       echo "</table>";
     } 
     else {
