@@ -47,6 +47,7 @@ CREATE TABLE Libro (
   ISBN10 varchar(100) NOT NULL,
   Titolo varchar(100) NOT NULL,
   Genere varchar(50) NOT NULL,
+  Anno int NOT NULL,
   CasaEditrice varchar(50) NOT NULL,
   NumeroPagine int NOT NULL,
   Lingua varchar(20) NOT NULL,
@@ -248,15 +249,15 @@ INSERT INTO Autore(Nome, Cognome, DataNascita, Nazionalità)
 -- Inserimenti tabella Libro
 --
 
-INSERT INTO Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore, Foto)
-  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 'Einaudi', 70, 'Italiano', 1, "C:\xampp\htdocs\progLibreria\books\lametamorfosi.png"),
-  (8804632631, 'Il visconte dimezzato', 'Narrativa', 'Mondadori', 119, 'Italiano', 2, "C:\xampp\htdocs\progLibreria\books\ilviscontedimezzato.png"),
-  (8804668237, '1984', 'Fantascienza', 'Mondadori', 333, 'Italiano', 3, "C:\xampp\htdocs\progLibreria\books\1984.png"),
-  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 'Feltrinelli', 352, 'Italiano', 4, "C:\xampp\htdocs\progLibreria\books\ilbuiooltrelasiepe.png"),
-  (8804667923, 'La fattoria degli animali', 'Satira politica', 'Mondadori', 141, 'Inglese', 3, "C:\xampp\htdocs\progLibreria\books\lafattoriadeglianimali.png"),
-  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 'Einaudi', 234, 'Italiano', 5, "C:\xampp\htdocs\progLibreria\books\unonessunoecentomila.png"),
-  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 'BUR', 324, 'Italiano', 5, "C:\xampp\htdocs\progLibreria\books\ilfumattiapascal.png"),
-  (8809843525, 'La sorella perduta', 'Romanzo rosa', 'Giunti', 864, 'Italiano', 6, "C:\xampp\htdocs\progLibreria\books\lasorellaperduta.png");
+INSERT INTO Libro(ISBN10, Titolo, Genere, Anno, CasaEditrice, NumeroPagine, Lingua, CodAutore, Foto)
+  VALUES (8806220632, 'La metamorfosi', 'Narrativa fantasy', 1915, 'Einaudi', 70, 'Italiano', 1, ".\\books\\lametamorfosi.png"),
+  (8804632631, 'Il visconte dimezzato', 'Narrativa', 1952, 'Mondadori', 119, 'Italiano', 2, ".\\books\\ilviscontedimezzato.png"),
+  (8804668237, '1984', 'Fantascienza', 1949, 'Mondadori', 333, 'Italiano', 3, ".\\books\\1984.png"),
+  (8807892790, 'Il buio oltre la siepe', 'Romanzo sociopolitico', 1960, 'Feltrinelli', 352, 'Italiano', 4, ".\\books\\ilbuiooltrelasiepe.png"),
+  (8804667923, 'La fattoria degli animali', 'Satira politica', 1945, 'Mondadori', 141, 'Inglese', 3, ".\\books\\lafattoriadeglianimali.png"),
+  (8806221965, 'Uno, nessuno e centomila', 'Narrativa', 1926, 'Einaudi', 234, 'Italiano', 5, ".\\books\\unonessunoecentomila.png"),
+  (8817016195, 'Il fu Mattia Pascal', 'Narrativa', 1904, 'BUR', 324, 'Italiano', 5, ".\\books\\ilfumattiapascal.png"),
+  (8809843525, 'La sorella perduta', 'Romanzo rosa', 2019, 'Giunti', 864, 'Italiano', 6, ".\\books\\lasorellaperduta.png");
 
 -- --------------------------------------------------------
 

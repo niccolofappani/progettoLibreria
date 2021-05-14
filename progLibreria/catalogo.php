@@ -39,7 +39,7 @@
                       die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql= "SELECT Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita;";
+                    $sql= "SELECT Libro.IDlibro, Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita;";
                     $result=$conn->query($sql);
                     if ($result->num_rows > 0) {
                         echo "<div id='ordinamento-libri'>";
@@ -47,9 +47,9 @@
                             while($row = $result->fetch_assoc()) {
                                 
                                 echo "<div class='libro'>
-                                    <a href=''><img id='foto' src='".$row['Foto']."' alt='immagine'></a><br>
-                                    <a href=''>".$row['Titolo']." </a> <br>
-                                    <p>Nuovo: ".$row['Prezzo']."</p>
+                                    <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form><br>
+                                    <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
+                                    <p>Nuovo: ".$row['Prezzo']." €</p>
                                 </div>";
                                 if($i%6==0){
                                     echo "<br>";
@@ -62,7 +62,9 @@
                         echo "Database vuoto";
                     }
                 ?>
-            
+                </div>
+            <script src="libro.js"></script>
     </body>
+
 </html>
 
