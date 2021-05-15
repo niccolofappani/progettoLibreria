@@ -53,7 +53,6 @@
                     <a href="#" class="genere">Fantascienza</a>
                     <a href="#" class="genere">Fantasy</a>
                     <a href="#" class="genere">Umorismo</a>
-                    <a href="#" class="genere">Narrativa</a>
                 </div> 
             </div>
 
@@ -80,6 +79,6 @@
         <script src="catalogScript.js"></script>
     </body>
 <?php 
-    $conn->close() 
+    $conn->close();
 ?>
 </html>

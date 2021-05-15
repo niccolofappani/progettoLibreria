@@ -132,7 +132,7 @@ input:focus{
   justify-content: space-between;
   align-items: left;
   flex-wrap: wrap;
-  padding-right: 200x;
+  
 }
 
 .libro {
@@ -180,8 +180,12 @@ input:focus{
   
 }
 
+
+
 #immagineSingola{
   margin-left: 4rem;
+  height: 210px;
+  width: 175px;  
 }
 
 #caratteristicheLibro{

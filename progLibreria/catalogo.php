@@ -62,7 +62,8 @@
                         echo "Database vuoto";
                     }
                 ?>
-            </div>
+                </div>
+        
     </body>
 
 </html>
