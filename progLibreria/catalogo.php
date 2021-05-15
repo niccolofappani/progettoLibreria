@@ -62,8 +62,7 @@
                         echo "Database vuoto";
                     }
                 ?>
-                </div>
-            <script src="libro.js"></script>
+            </div>
     </body>
 
 </html>
