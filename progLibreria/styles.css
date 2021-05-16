@@ -1,5 +1,5 @@
 body{
-  background-color: green;
+  background-color: rgb(192, 135, 11);
 } 
 
 #top{
@@ -180,14 +180,24 @@ input:focus{
   
 }
 
-
-
 #immagineSingola{
   margin-left: 4rem;
-  height: 210px;
-  width: 175px;  
+}
+
+#fotoLibro{
+  height: 350px;
+  width: 300px;
 }
 
 #caratteristicheLibro{
   margin-left: 8rem;
+}
+
+.tipologia{
+  background-color: orange;
+}
+
+#buttonCarrello{
+  background-color: orange;
+  margin-left: 5px;
 }
