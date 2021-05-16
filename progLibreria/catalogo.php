@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <html>
     <head>
         <title>Catalogo</title>
@@ -21,13 +25,25 @@
                 </form>
             </div>
                 
-            <div id="buttons">
+            <?php
+            if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
+                echo "<div id='buttons'>
+                    <button id='profile'>Ciao ".$_SESSION['user']."</button>
+                    <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                    <button id='cart'><i class='fa fa-shopping-cart'></i></button><br>
+                    <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
+                </div>";
+            }else{
+                echo "<div id='buttons'>
                 <h3>
-                    <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
-                    <input type="button" class="btn btn-warning" id="signUp" value="Registrati" onclick="document.location='SignUp.php'"></input>
-                    <button id="cart"><i class="fa fa-shopping-cart"></i></button>
+                    <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
+                    <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
+                    <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                    <button id='cart'><i class='fa fa-shopping-cart'></i></button>
                 </h3>
-            </div>
+            </div>";
+            }
+            ?>
             
                 <?php
                     $servername = "localhost";
