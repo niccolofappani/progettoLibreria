@@ -1,6 +1,15 @@
 
 
 
+<?php
+    session_start();
+    if(!isset($_SESSION["logged"])){
+        $_SESSION["logged"]=false;
+    }
+
+    $_SESSION["itemid"]=$_GET["itemid"];
+?>
+
 <html>
     <head>
         <title>Catalogo</title>
@@ -25,13 +34,6 @@
             </div>
 
             <?php
-                
-                session_start();
-               
-                
-                
-
-                echo $_SESSION['itemid'];
                 $servername = 'localhost';
                 $username = 'root';
                 $password = '';
@@ -40,12 +42,11 @@
                 if ($conn->connect_error) { //fallimento della connessione
                   die('Connection failed: ' . $conn->connect_error);
                 }
-
                 $sql= "SELECT * FROM libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita LEFT JOIN LibroUsato ON Libro.IDlibro=LibroUsato.IDUsato WHERE Libro.IDlibro= ".$_GET['itemid'];
                 $result=$conn->query($sql);
                 $row = $result->fetch_assoc();
                 $_SESSION['row']=$row;
-                echo "<div><p>Home / Catalogo /".$_SESSION['row']['Genere']." / ".$_SESSION['row']['Titolo']."</p></div>";
+                echo "<div><p><a href='index.php'>Home </a> / <a href='catalogo.php'>Catalogo </a>/".$_SESSION['row']['Genere']." / ".$_SESSION['row']['Titolo']."</p></div>";
                 echo "<div id='flex-container'><div id='immagineSingola'><img id='fotoLibro' src='".$_SESSION['row']['Foto']."'></div>
                 <div id='caratteristicheLibro'><h3>".$_SESSION['row']['Titolo']."</h3> <br>
                 <p>Autore: ".$_SESSION['row']['Nome']." " .$_SESSION['row']['Cognome']."</p>
@@ -54,23 +55,24 @@
                 <p>Pagine: ".$_SESSION['row']['NumeroPagine']."</p>
                 <p>Lingua: ".$_SESSION['row']['Lingua']."</p>
                 <p>ISBN-10: ".$_SESSION['row']['ISBN10']."</p>
-                <form action='libroSingolo.php' method='get'><button type='submit' value='1' name='tipoAcquisto' class='tipologia'>Nuovo: € ".$_SESSION['row']['Prezzo']."</button></form>
-                <form action='libroSingolo.php' method='get'><button type='submit' value='2' name='tipoAcquisto' class='tipologia'>Usato: € ".$_SESSION['row']['PrezzoUsato']."</button></form>
-                <form action='libroSingolo.php' method='get'><button type='submit' value='3' name='tipoAcquisto' class='tipologia'>Prestito: -</button></form></div>";
-                if($_SESSION['tipo']=1){
-                    echo "<div id='pulsantiAcquisto'>
-                    <h2>Totale: € ".$_SESSION['row']['Prezzo']."</h2>
-                    <form action='' method='post'><label for='copie'>Quantita: </label><input type='number' name='copie' value='1' max='".$_SESSION['row']['QuantitaVendita']."'>
-                    <button type='submit'>Aggiungi al carrello</button></form></div></div>";
-                }else if($_SESSION['tipo']=2){
-                    echo "<div id='pulsantiAcquisto'>
-                    <h2>Totale: € ".$_SESSION['row']['PrezzoUsato']."</h2>
-                    <form action='' method='post'><label for='copie'>Quantita : </label><input type='number' name='copie' value='1' max='".$_SESSION['row']['QuantitaUsato']."'>
-                    <button type='submit'>Aggiungi al carrello</button></form></div></div>";
+                <button type='submit' onclick='tipoProdotto(".$_SESSION['row']['Prezzo'].", ".$_SESSION['row']['QuantitaVendita'].", ".$_SESSION['logged'].")'   value='1' name='tipoAcquisto' class='tipologia'>Nuovo: € ".$_SESSION['row']['Prezzo']."</button>
+                <button type='submit' onclick='tipoProdotto(".$_SESSION['row']['PrezzoUsato'].", ".$_SESSION['row']['QuantitaUsato'].", ".$_SESSION['logged'].")'   value='2' name='tipoAcquisto' class='tipologia'>Usato: € ".$_SESSION['row']['PrezzoUsato']."</button>
+                <button type='submit' onclick='tipoProdotto(0, ".$_SESSION['row']['QuantitaUsato'].", ".$_SESSION['logged'].")'   value='3' name='tipoAcquisto' class='tipologia'>Prestito: -</button></div>
+                <div id='pulsantiAcquisto'>";
+                
+                echo "
+                <h2>Totale: € ".$_SESSION['row']['Prezzo']."</h2>
+                <form action='aggiungiCarrello.php' method='post'><label for='copie'>Quantita: </label><input id='numerolibri' type='number' name='copie' value='1' min='1' max='".$_SESSION['row']['QuantitaVendita']."'>";
+                if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
+                    echo "<button type='submit' id='buttonCarrello'>Aggiungi al carrello</button></form></div>";
+                }else{
+                    $alert= "Hai bisogno di effettuare il login";
+                    echo "<button id='buttonCarrello type='submit'  title='devi effettuare il login' disabled>Aggiungi al carrello</button></form></div>";
                 }
-                $_SESSION['row']=$row;
+                
+                echo "</div>
+                <script src='buttons.js'></script>";
             ?>
-
         </div>
     </body>
 </html>    
