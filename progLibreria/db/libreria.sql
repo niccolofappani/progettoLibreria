@@ -160,17 +160,6 @@ CREATE TABLE MetodoPagamento(
   FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
---
--- Struttura della tabella Carrello
---
-
-CREATE TABLE Carrello(
-  IDCarrello int NOT NULL AUTO_INCREMENT,
-  IDUtente varchar(100) NOT NULL,
-  PRIMARY KEY (IDCarrello),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
 -- Struttura della tabella Carrello libri
 --
@@ -178,10 +167,12 @@ CREATE TABLE Carrello(
 CREATE TABLE CarrelloLibri(
   IDCarrelloLibri int NOT NULL AUTO_INCREMENT,
   IDLibro int NOT NULL,
+  IDutente varchar(100) NOT NULL
   Quantita int NOT NULL,
   IDCarrello int NOT NULL,
   PRIMARY KEY (IDCarrelloLibri),
   FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro),
+  FOREIGN KEY (IDutente) REFERENCES Utente(IDutente),
   FOREIGN KEY (IDCarrello) REFERENCES Carrello(IDCarrello)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -206,6 +197,7 @@ CREATE TABLE Ordine(
   IDOrders int NOT NULL,
   IDLibro int NOT NULL,
   Quantita int NOT NULL,
+  Prezzo float NOT NULL,
   PRIMARY KEY (IDOrdine),
   FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
   FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
