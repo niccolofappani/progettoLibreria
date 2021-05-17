@@ -116,22 +116,6 @@ CREATE TABLE Prestito (
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
   FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(IDUsato)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
---
--- Struttura della tabella Vendite
---
-
-CREATE TABLE Vendite(
-  IDVendite int NOT NULL AUTO_INCREMENT,
-  IDutente varchar(100) NOT NULL,
-  IDlibroVendita int NOT NULL,
-  DataAcquisto date NOT NULL,
-  PRIMARY KEY (IDVendite),
-  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (IDlibroVendita) REFERENCES LibroVendita(IDVendita)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 --
 -- Struttura della tabella Voto
