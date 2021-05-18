@@ -167,13 +167,11 @@ CREATE TABLE MetodoPagamento(
 CREATE TABLE CarrelloLibri(
   IDCarrelloLibri int NOT NULL AUTO_INCREMENT,
   IDLibro int NOT NULL,
-  IDutente varchar(100) NOT NULL
+  IDutente varchar(100) NOT NULL,
   Quantita int NOT NULL,
-  IDCarrello int NOT NULL,
   PRIMARY KEY (IDCarrelloLibri),
   FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro),
-  FOREIGN KEY (IDutente) REFERENCES Utente(IDutente),
-  FOREIGN KEY (IDCarrello) REFERENCES Carrello(IDCarrello)
+  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

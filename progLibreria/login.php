@@ -16,7 +16,6 @@
 
             <div id='buttons'>
                 <h3><input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick="document.location='SignUp.php'"></input>
-                <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
             </div>
 
             <form method="post" action="checkLogin.php">
@@ -34,4 +33,3 @@
         </div>
     </body>
 </html>
-

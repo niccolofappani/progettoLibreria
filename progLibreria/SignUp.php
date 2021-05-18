@@ -22,8 +22,7 @@
                 </div>
 
             <div id='buttons'>
-            <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
-                <button id='cart'><i class='fa fa-shopping-cart'></i></button>
+            <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input>
             </div>
             
                 <form method='post' id='signup'>

@@ -24,7 +24,7 @@
                 </form>
             </div>
             <?php
-            if(isset($_SESSION["logged"]) && $_SESSION["logged"]=true){ 
+            if(isset($_SESSION["logged"]) && $_SESSION["logged"]==true){ 
                 echo "<div id='buttons'>
                     <button id='profile'>Ciao ".$_SESSION['user']."</button>
                     <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>

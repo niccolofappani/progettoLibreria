@@ -19,6 +19,7 @@
         else if(strcmp($array[0]['Psw'],  $_POST['psw']) == 0){
             $_SESSION["logged"]=true;
             $_SESSION["user"]=$array[0]['Nome'];
+            $_SESSION["codFisc"]=$array[0]["CodFiscale"];
             echo '<script>alert("Login effettuato");
             setTimeout(function(){
                 location.replace("index.php")

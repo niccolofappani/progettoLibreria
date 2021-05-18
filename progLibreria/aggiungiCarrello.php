@@ -1,19 +1,24 @@
 <?php
     session_start();
-    $host = "localhost:3310";
-    $user = "root";
-    $pass = "";
-    $db = "libreria";
-    // connessione al DBMS
-    $connessione = mysqli_connect($host, $user, $pass, $db) or die("Connessione non riuscita " . mysqli_connect_error() );
+    include('db_connect.php');
+
+
     
-    $query="insert into CarrelloLibri(IDlibro, Quantita, IDcarrello)
-    values(".$_SESSION['itemid'].",".$_POST['numeroLibri'].",".$_SESSION["IDcarrello"].");";
-    echo "PORCODIO!!!!!!!!!!!! funzionaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    echo "<button onclick=document.location='carrello.php'></button>Vai al carrello</button>"
-    $result = mysqli_query($connessione, $query) or
+    if ($conn->connect_error) { //fallimento della connessione
+        die('Connection failed: ' . $conn->connect_error);
+    }
     
-    die ("Query fallita " . mysqli_error($connessione) . " " . mysqli_error($connessione));
-    
-    mysqli_close($connessione) or die("Chiusura connessione fallita " . mysqli_error($connessione));
+    $sql="insert into carrelloLibri(IDlibro, IDutente, Quantita)
+            values(".$_SESSION['itemid'].", '".$_SESSION['codFisc']."', ".$_POST['numerolibri'].")";
+    echo $_POST["numerolibri"];
+    echo $_SESSION["codFisc"];
+    echo $_SESSION["itemid"];
+    if($conn->query($sql) == TRUE){
+        echo "<h2>aggiunto al carrello</h2>
+                <button onclick=document.location='carrello.php'>Vai al carrello</button>
+                <button onclick=document.location='catalogo.php'>Continua ad acquistare</button>";
+    }else{
+        echo "<h2>errore</h2>";
+    }
+
 ?>

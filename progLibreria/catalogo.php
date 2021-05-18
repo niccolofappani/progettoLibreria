@@ -1,5 +1,10 @@
 <?php
     session_start();
+    include('db_connect.php');
+    $sql="SELECT count(carrelloLibri.IDcarrellolibri) as conto FROM carrelloLibri WHERE CarrelloLibri.IDutente= '".$_SESSION["codFisc"]."'"; 
+    $result=$conn->query($sql);
+    $row = $result->fetch_assoc();
+    
 ?>
 
 <html>
@@ -29,8 +34,7 @@
             if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
                 echo "<div id='buttons'>
                     <button id='profile'>Ciao ".$_SESSION['user']."</button>
-                    <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
-                    <button id='cart'><i class='fa fa-shopping-cart'></i></button><br>
+                    <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>".$row['conto']."<br>
                     <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
                 </div>";
             }else{
@@ -39,7 +43,7 @@
                     <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
                     <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
                     <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
-                    <button id='cart'><i class='fa fa-shopping-cart'></i></button>
+                    <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>
                 </h3>
             </div>";
             }
