@@ -39,10 +39,15 @@
                 if ($conn->connect_error) { //fallimento della connessione
                   die('Connection failed: ' . $conn->connect_error);
                 }
-                $sql= "SELECT * FROM libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita LEFT JOIN LibroUsato ON Libro.IDlibro=LibroUsato.IDUsato WHERE Libro.IDlibro= ".$_SESSION['itemid'];
+                $sql= "SELECT * FROM libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro  WHERE Libro.IDlibro= ".$_SESSION['itemid']." and Tipo='Nuovo'";
                 $result=$conn->query($sql);
                 $row = $result->fetch_assoc();
                 $_SESSION['row']=$row;
+
+                $sql2 = "SELECT * FROM libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro  WHERE Libro.IDlibro= ".$_SESSION['itemid']." and Tipo='Usato'";
+                $result2=$conn->query($sql2);
+                $row2 = $result2->fetch_assoc();
+                $_SESSION['row2']=$row2;
                 echo "<div><p><a href='index.php'>Home </a> / <a href='catalogo.php'>Catalogo </a>/".$_SESSION['row']['Genere']." / ".$_SESSION['row']['Titolo']."</p></div>";
                 echo "<div id='flex-container'><div id='immagineSingola'><img id='fotoLibro' src='".$_SESSION['row']['Foto']."'></div>
                 <div id='caratteristicheLibro'><h3>".$_SESSION['row']['Titolo']."</h3> <br>
@@ -52,14 +57,14 @@
                 <p>Pagine: ".$_SESSION['row']['NumeroPagine']."</p>
                 <p>Lingua: ".$_SESSION['row']['Lingua']."</p>
                 <p>ISBN-10: ".$_SESSION['row']['ISBN10']."</p>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Nuovo: € ".$_SESSION['row']['Prezzo']."' onclick='tipoProdotto(".$_SESSION['row']['Prezzo'].", ".$_SESSION['row']['QuantitaVendita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Usato: € ".$_SESSION['row']['PrezzoUsato']."' onclick='tipoProdotto(".$_SESSION['row']['PrezzoUsato'].", ".$_SESSION['row']['QuantitaUsato'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Prestito' onclick='tipoProdotto(0, ".$_SESSION['row']['QuantitaUsato'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input></div>
+                <input type='button' class='btn btn-warning' id='tipologia' value='Nuovo: € ".$_SESSION['row']['Prezzo']."' onclick='tipoProdotto(".$_SESSION['row']['Prezzo'].", ".$_SESSION['row']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
+                <input type='button' class='btn btn-warning' id='tipologia' value='Usato: € ".$_SESSION['row2']['Prezzo']."' onclick='tipoProdotto(".$_SESSION['row2']['Prezzo'].", ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
+                <input type='button' class='btn btn-warning' id='tipologia' value='Prestito' onclick='tipoProdotto(0, ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input></div>
                 <div id='pulsantiAcquisto'>";
                 
                 echo "
                 <h2>Totale: € ".$_SESSION['row']['Prezzo']."</h2>
-                <form action='aggiungiCarrello.php' method='post'><label for='copie'>Quantita: </label><input name='numerolibri' type='number' value='1' min='1' max='".$_SESSION['row']['QuantitaVendita']."'>";
+                <form action='aggiungiCarrello.php' method='post'><label for='copie'>Quantita: </label><input name='numerolibri' type='number' value='1' min='1' max='".$_SESSION['row']['Quantita']."'>";
                 if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
                     echo "<button type='submit' class='btn btn-warning' id='buttonCarrello'>Aggiungi al carrello</button></form></div>";
                 }else{

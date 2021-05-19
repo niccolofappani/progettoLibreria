@@ -62,26 +62,16 @@ CREATE TABLE Libro (
 -- Struttura della tabella Libro da vendere
 --
 
-CREATE TABLE LibroVendita (
-  IDVendita int NOT NULL,
-  QuantitaVendita int NOT NULL,
+CREATE TABLE TipoLibro (
+  IDTipoLibro int NOT NULL,
+  Quantita int NOT NULL,
   Prezzo float NOT NULL,
-  PRIMARY KEY (IDVendita),
-  FOREIGN KEY (IDVendita) REFERENCES Libro(IDLibro)
+  Tipo varchar(100) NOT NULL,
+  PRIMARY KEY (IDTipoLibro, Tipo),
+  FOREIGN KEY (IDTipoLibro) REFERENCES Libro(IDLibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
---
--- Struttura della tabella libro usato
---
 
-CREATE TABLE LibroUsato (
-  IDUsato int NOT NULL,
-  PrezzoUsato float NOT NULL,
-  QuantitaUsato int NOT NULL,
-  PRIMARY KEY (IDUsato),
-  FOREIGN KEY (IDusato) REFERENCES Libro(IDLibro)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 --
@@ -109,12 +99,12 @@ CREATE TABLE Utente (
 CREATE TABLE Prestito (
   IDPrestito int NOT NULL AUTO_INCREMENT,
   IDutente varchar(100) NOT NULL,
-  IDlibroUsato int NOT NULL,
+  IDLibro int NOT NULL,
   DataInizio date NOT NULL,
   DataFine date NOT NULL,
   PRIMARY KEY (IDPrestito),
   FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (IDlibroUsato) REFERENCES LibroUsato(IDUsato)
+  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipolibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- --------------------------------------------------------
 --
@@ -169,9 +159,11 @@ CREATE TABLE CarrelloLibri(
   IDLibro int NOT NULL,
   IDutente varchar(100) NOT NULL,
   Quantita int NOT NULL,
+  Tipo varchar(100) NOT NULL,
   PRIMARY KEY (IDCarrelloLibri),
-  FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro),
-  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale)
+  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro),
+  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (Tipo) REFERENCES TipoLibro(Tipo)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -198,7 +190,7 @@ CREATE TABLE Ordine(
   Prezzo float NOT NULL,
   PRIMARY KEY (IDOrdine),
   FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
-  FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
+  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -244,31 +236,23 @@ INSERT INTO Libro(ISBN10, Titolo, Genere, Anno, CasaEditrice, NumeroPagine, Ling
 -- --------------------------------------------------------
 
 --
--- Inserimenti tabella LibroVendita
+-- Inserimenti tabella TipoLibro
 --
 
-INSERT INTO LibroVendita (IDVendita, QuantitaVendita, Prezzo)
-  VALUES (1, 5, 8.55),
-  (2, 11, 12.00),
-  (3, 24, 11.40),
-  (4, 1, 9.50),
-  (5, 1, 9.50),
-  (6, 20, 9.50),
-  (7, 0, 7.60),
-  (8, 70, 18.81);
-
--- --------------------------------------------------------
-
---
--- Inserimenti tabella LibroUsato
---
-
-INSERT INTO LibroUsato (IDUsato, PrezzoUsato, QuantitaUsato)
-  VALUES (1, 4.28, 3),
-  (2, 6, 2),
-  (3, 5.7, 4),
-  (4, 4.75, 1),
-  (5, 4.75, 7),
-  (6, 4.75, 0),
-  (7, 3.8, 15),
-  (8, 9.4, 0);
+INSERT INTO TipoLibro (IDTipoLibro, Quantita, Prezzo, Tipo)
+  VALUES (1, 5, 8.55, "Nuovo"),
+  (2, 11, 12.00, "Nuovo"),
+  (3, 24, 11.40, "Nuovo"),
+  (4, 1, 9.50, "Nuovo"),
+  (5, 1, 9.50, "Nuovo"),
+  (6, 20, 9.50, "Nuovo"),
+  (7, 0, 7.60, "Nuovo"),
+  (8, 70, 18.81, "Nuovo"),
+  (1, 3, 4.28, "Usato"),
+  (2, 2, 6, "Usato"),
+  (3, 4, 5.7, "Usato"),
+  (4, 1, 4.75, "Usato"),
+  (5, 7, 4.75, "Usato"),
+  (6, 0, 4.75, "Usato"),
+  (7, 15, 3.8, "Usato"),
+  (8, 0, 9.4, "Usato");

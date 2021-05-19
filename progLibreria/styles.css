@@ -1,5 +1,5 @@
 body{
-  background-color: rgb(192, 135, 11);
+  background-color: #cca525;
 } 
 
 #top{
@@ -193,11 +193,27 @@ input:focus{
   margin-left: 8rem;
 }
 
-.tipologia{
-  background-color: orange;
+#tipologia{
+  color: red;
 }
 
 #buttonCarrello{
   background-color: orange;
   margin-left: 5px;
+}
+
+a:link {
+  color: #ffe08a;;
+}
+
+a:visited {
+  color: #ffe08a;;
+}
+
+a:hover {
+  color: blue;
+}
+
+a:active {
+  color: #ffe08a;;
 }

@@ -2,8 +2,6 @@
     session_start();
     include('db_connect.php');
 
-
-    
     if ($conn->connect_error) { //fallimento della connessione
         die('Connection failed: ' . $conn->connect_error);
     }

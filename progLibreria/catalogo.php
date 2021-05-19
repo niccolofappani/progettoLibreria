@@ -1,10 +1,11 @@
 <?php
     session_start();
     include('db_connect.php');
+    if(isset($_SESSION['codFisc'])){ 
     $sql="SELECT count(carrelloLibri.IDcarrellolibri) as conto FROM carrelloLibri WHERE CarrelloLibri.IDutente= '".$_SESSION["codFisc"]."'"; 
     $result=$conn->query($sql);
     $row = $result->fetch_assoc();
-    
+    }
 ?>
 
 <html>
@@ -59,7 +60,7 @@
                       die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql= "SELECT Libro.IDlibro, Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita;";
+                    $sql= "SELECT Libro.IDlibro, Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, TipoLibro.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE Tipo='Nuovo';";
                     $result=$conn->query($sql);
                     if ($result->num_rows > 0) {
                         echo "<div id='ordinamento-libri'>";
