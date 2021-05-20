@@ -57,19 +57,19 @@
                 <p>Pagine: ".$_SESSION['row']['NumeroPagine']."</p>
                 <p>Lingua: ".$_SESSION['row']['Lingua']."</p>
                 <p>ISBN-10: ".$_SESSION['row']['ISBN10']."</p>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Nuovo: € ".$_SESSION['row']['Prezzo']."' onclick='tipoProdotto(".$_SESSION['row']['Prezzo'].", ".$_SESSION['row']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Usato: € ".$_SESSION['row2']['Prezzo']."' onclick='tipoProdotto(".$_SESSION['row2']['Prezzo'].", ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input>
-                <input type='button' class='btn btn-warning' id='tipologia' value='Prestito' onclick='tipoProdotto(0, ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'></input></div>
+                <button class='btn btn-warning' id='tipologia' value='' onclick='tipoProdotto(".$_SESSION['row']['Prezzo'].", ".$_SESSION['row']['Quantita'].", ".$_SESSION['logged'].", `Nuovo`)' name='tipoAcquisto'>Nuovo: € ".$_SESSION['row']['Prezzo']."</button>
+                <button class='btn btn-warning' id='tipologia' value='' onclick='tipoProdotto(".$_SESSION['row2']['Prezzo'].", ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].", `Usato`)' name='tipoAcquisto'>Usato: € ".$_SESSION['row2']['Prezzo']."</button>
+                <button class='btn btn-warning' id='tipologia' value='' onclick='tipoProdotto(0, ".$_SESSION['row2']['Quantita'].", ".$_SESSION['logged'].")' name='tipoAcquisto'>Prestito</button></div>
                 <div id='pulsantiAcquisto'>";
                 
                 echo "
                 <h2>Totale: € ".$_SESSION['row']['Prezzo']."</h2>
-                <form action='aggiungiCarrello.php' method='post'><label for='copie'>Quantita: </label><input name='numerolibri' type='number' value='1' min='1' max='".$_SESSION['row']['Quantita']."'>";
+                <label for='copie'>Quantita: </label><input id='numerolibri' type='number' value='1' min='1' max='".$_SESSION['row']['Quantita']."'>";
                 if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
-                    echo "<button type='submit' class='btn btn-warning' id='buttonCarrello'>Aggiungi al carrello</button></form></div>";
+                    echo "<button type='submit'  class='btn btn-warning' onclick='ajaxCarrello()' id='".$_SESSION['row']['Tipo']."'>Aggiungi al carrello</button></div>";
                 }else{
-                    $alert= "Hai bisogno di effettuare il login";           //da fare l'alert invece che il title
-                    echo "<button type='submit' class='btn btn-warning' id='buttonCarrello' title='Devi effettuare il login' disabled>Aggiungi al carrello</button></form></div>";
+                    $alert= "Hai bisogno di effettuare il login";           
+                    echo "<button type='submit' class='btn btn-warning'  id='".$_SESSION['row']['Tipo']."' title='Devi effettuare il login' disabled>Aggiungi al carrello</button></div>";
                 }
                 
                 echo "</div>

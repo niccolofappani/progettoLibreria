@@ -162,8 +162,7 @@ CREATE TABLE CarrelloLibri(
   Tipo varchar(100) NOT NULL,
   PRIMARY KEY (IDCarrelloLibri),
   FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro),
-  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (Tipo) REFERENCES TipoLibro(Tipo)
+  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

@@ -5,18 +5,28 @@
     if ($conn->connect_error) { //fallimento della connessione
         die('Connection failed: ' . $conn->connect_error);
     }
-    
-    $sql="insert into carrelloLibri(IDlibro, IDutente, Quantita)
-            values(".$_SESSION['itemid'].", '".$_SESSION['codFisc']."', ".$_POST['numerolibri'].")";
-    echo $_POST["numerolibri"];
-    echo $_SESSION["codFisc"];
-    echo $_SESSION["itemid"];
-    if($conn->query($sql) == TRUE){
-        echo "<h2>aggiunto al carrello</h2>
-                <button onclick=document.location='carrello.php'>Vai al carrello</button>
-                <button onclick=document.location='catalogo.php'>Continua ad acquistare</button>";
+
+
+    $tipo = urldecode($_POST['itemTipo']);
+    $numero = json_decode($_POST['numero']);
+
+    $sql2= "SELECT * FROM carrelloLibri WHERE carrelloLibri.IDLibro=".$_SESSION['itemid']." AND carrelloLibri.Tipo='".$tipo."'";
+    $result=$conn->query($sql2);
+    if($result->num_rows > 0){
+        $row2 = $result->fetch_assoc();
+        $quantita=$row2['Quantita'] + $numero;
+        $sql2="UPDATE carrelloLibri SET carrelloLibri.Quantita = ".$quantita." WHERE carrelloLibri.IDLibro=".$_SESSION['itemid']." AND carrelloLibri.Tipo='".$tipo."'";
+        $conn->query($sql2);
     }else{
-        echo "<h2>errore</h2>";
+        $sql="insert into carrelloLibri(IDlibro, IDutente, Quantita, Tipo)
+            values(".$_SESSION['itemid'].", '".$_SESSION['codFisc']."', ".$numero.", '".$tipo."')";
+    
+    $conn->query($sql);
+    
     }
+
+      
+    
+    
 
 ?>
