@@ -20,12 +20,12 @@
     if ($conn->connect_error) { //fallimento della connessione
       die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM Libro LEFT JOIN Tipolibro ON Libro.IDLibro=TipoLibro.IDLibro WHERE TipoLibro.Tipo='Nuovo'"; 
+    $sql = "SELECT * FROM Libro JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE TipoLibro.Tipo='Nuovo'"; 
     $result = $conn->query($sql);
-    $sql2 = "SELECT * FROM Libro LEFT JOIN Tipolibro ON Libro.IDLibro=TipoLibro.IDLibro WHERE TipoLibro.Tipo='Usato'"; 
-    $result2 = $conn->query($sql); 
+    $sql2 = "SELECT * FROM Libro JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE TipoLibro.Tipo='Usato'"; 
+    $result2 = $conn->query($sql2); 
   
-    if ($result->num_rows > 0) {
+    if ($result) {
       echo "<table id='tabellaDB'>";
       echo "<tr><th>ISBN</th><th>Titolo</th><th>Genere</th><th>Codice Autore</th><th>Numero Pagine</th><th>Casa Editrice</th><th>
       Lingua</th><th>Prezzo</th><th>Prezzo Usato</th><th>Copie</th><th>Copie Usato</th></tr>";

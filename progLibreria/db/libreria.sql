@@ -125,6 +125,7 @@ CREATE TABLE Voto(
 CREATE TABLE Commento(
   IDCommento int NOT NULL AUTO_INCREMENT,
   Corpo varchar(200) NOT NULL,
+  DataCommento timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   IDVoto int NOT NULL,
   IDUtente varchar(100) NOT NULL,
   IDLibro int NOT NULL,

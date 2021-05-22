@@ -25,7 +25,7 @@
             <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input>
             </div>
             
-                <form method='post' id='signup'>
+                <form method='post' action='registered.php'>
                 <div class='form-group'>
                     <label>Nome</label>
                     <input type='text' class='form-control w-50' placeholder='Nome' required name='nome'>
@@ -69,37 +69,3 @@
     </body>
 </html>
 
-<script>
-	$('#signup').submit(function(e){
-		e.preventDefault()
-		$('#signup button[type="submit"]').attr('disabled',true).html('Saving...');
-		if($(this).find('.alert-danger').length > 0 )
-			$(this).find('.alert-danger').remove();
-		$.ajax({
-			url:'ajax.php?action=signup',
-			method:'POST',
-			data:$(this).serialize(),
-			error:err=>{
-				console.log(err)
-		        $('#signup button[type="submit"]').removeAttr('disabled').html('Create');
-            },
-			success:function(resp){
-				if(resp == 1){
-					alert("Registrazione effettuata!")
-                        setTimeout(function(){
-                            location.replace('index.php')
-                        },1500)
-					<?php session_destroy()?>
-                    location.href ='index.php';
-                }
-                else{
-                    alert("Errore, Email o Codice Fiscale già utilizzati!");
-                        setTimeout(function(){
-                            location.replace('SignUp.php')
-                        },1500)
-                    location.href ='SignUp.php';
-                }
-			}
-		})
-	})
-</script>

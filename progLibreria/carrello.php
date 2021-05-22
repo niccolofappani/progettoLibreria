@@ -1,6 +1,5 @@
 <?php
     session_start();
-    include('header.php');
     include('db_connect.php');
 ?>
 <html>
@@ -15,7 +14,7 @@
     </head>
     <body>
         <div id="container">
-            <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
+            <a href="index.php"><img id="logo" src="img/libro.png" alt="libro"></a>
             <div id="top">
                 <label id="title">Libreria di Scandicci</label>
                 <form id="searchForm">
@@ -24,7 +23,7 @@
                 </form>
             </div>
             <?php
-            if(isset($_SESSION["logged"]) && $_SESSION["logged"]==true){ 
+            if(isset($_SESSION['logged']) && $_SESSION['logged']==true){ 
                 echo "<div id='buttons'>
                     <button id='profile'>Ciao ".$_SESSION['user']."</button>
                     <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
@@ -45,21 +44,20 @@
 
 
 
-    $sql= "SELECT * FROM CarrelloLibri JOIN Utente ON Utente.CodFiscale=`".$_SESSION['codFisc'].` JOIN TipoLibro ON TipoLibro.IDLibro=CarrelloLibri.IDLibro JOIN libro ON libro.IDLibro=TipoLibro.IDLibro";
+    $sql= "SELECT * FROM CarrelloLibri LEFT JOIN TipoLibro ON TipoLibro.IDTipoLibro=CarrelloLibri.IDLibro and TipoLibro.Tipo=CarrelloLibri.Tipo LEFT JOIN libro ON libro.IDLibro=TipoLibro.IDTipoLibro WHERE CarrelloLibri.IDutente='".$_SESSION['codFisc']."'";
     $result=$conn->query($sql);
-    if($result->num_rows > 0){ 
+    if($result){ 
         echo "<div id='contenitore-carrello'>";
         while($row = $result->fetch_assoc()){
             echo "<div class='articolo-carrello'>
-            <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form>
-            <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
-            
-            </div>"
+            <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row['IDLibro']."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form>
+            <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row['IDLibro']."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
+            </div>";
         }
 
         echo "</div>";
         
     }else{
-        echo "<p>i' carrello llè voto</p>";
+        echo "<p>Il carrello è vuoto</p>";
     }
 ?>

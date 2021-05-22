@@ -8,14 +8,21 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "DELETE FROM libroUsato WHERE IDUsato=".$_POST['itemid'];
+
+
+    $sql = "DELETE FROM CarrelloLibri WHERE IDLibro=".$_POST['itemid'];
     $conn->query($sql);
 
-    $sql = "DELETE FROM libroVendita WHERE IDVendita=".$_POST['itemid'];
+    $sql = "DELETE FROM Libro WHERE IDLibro=".$_POST['itemid'];
     $conn->query($sql);
 
-    $sql = "DELETE FROM libro WHERE IDLibro=".$_POST['itemid'];
+    $sql = "DELETE FROM TipoLibro WHERE IDTipoLibro=".$_POST['itemid'];
     $conn->query($sql);
+
+    $sql = "DELETE FROM TipoLibro WHERE IDTipoLibro=".$_POST['itemid'];
+    $conn->query($sql);
+
+
 
     
 ?>
