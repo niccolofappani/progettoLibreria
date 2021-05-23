@@ -167,15 +167,15 @@ CREATE TABLE CarrelloLibri(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Struttura della tabella Orders unico per ogni utente
+-- Struttura della tabella ProdOrdinati unico per ogni utente
 --
-CREATE TABLE Orders (
-  IDOrders int NOT NULL AUTO_INCREMENT,
-  IDUtente varchar(100) NOT NULL,
-  IDMetodo int NOT NULL,
-  PRIMARY KEY (IDOrders),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale),
-  FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
+CREATE TABLE ProdOrdinati (
+  IDprodOrdinati int NOT NULL,
+  Quantita int NOT NULL,
+  IDLibro int NOT NULL,
+  PRIMARY KEY (IDprodOrdinati, IDlibro),
+  FOREIGN KEY (IDprodOrdinati) REFERENCES Ordine(IDOrdine),
+  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -184,13 +184,15 @@ CREATE TABLE Orders (
 
 CREATE TABLE Ordine(
   IDOrdine int NOT NULL AUTO_INCREMENT,
-  IDOrders int NOT NULL,
-  IDLibro int NOT NULL,
-  Quantita int NOT NULL,
+  IDutente int NOT NULL,
   Prezzo float NOT NULL,
+  IDMetodo int NOT NULL,
+  dataAcquisto date NOT NULL,
   PRIMARY KEY (IDOrdine),
   FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
-  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro)
+  FOREIGN KEY (IDutente) REFERENCES Utente (codFiscale),
+  FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
+  
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

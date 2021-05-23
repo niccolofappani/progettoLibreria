@@ -56,7 +56,11 @@
         }
 
         echo "</div>";
-        
+        echo "<div id='pagamento'>
+                <button id='buy' onclick='verify()'>Procedi al pagamento</button></div>";
+
+
+        echo "<script src='buy.js'></script>";
     }else{
         echo "<p>Il carrello è vuoto</p>";
     }
