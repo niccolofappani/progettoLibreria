@@ -79,6 +79,7 @@ CREATE TABLE TipoLibro (
 --
 
 CREATE TABLE Utente (
+  IDutente int NOT NULL AUTO_INCREMENT,
   CodFiscale varchar(100) NOT NULL,
   Nome varchar(50) NOT NULL,
   Cognome varchar(50) NOT NULL,
@@ -88,7 +89,7 @@ CREATE TABLE Utente (
   NumeroCivico varchar(10) NOT NULL,
   CAP varchar(20) NOT NULL,
   Citta varchar(50) NOT NULL,
-  PRIMARY KEY (CodFiscale)
+  PRIMARY KEY (IDutente)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -98,12 +99,12 @@ CREATE TABLE Utente (
 
 CREATE TABLE Prestito (
   IDPrestito int NOT NULL AUTO_INCREMENT,
-  IDutente varchar(100) NOT NULL,
+  IDutente int NOT NULL,
   IDLibro int NOT NULL,
   DataInizio date NOT NULL,
   DataFine date NOT NULL,
   PRIMARY KEY (IDPrestito),
-  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDutente) REFERENCES Utente(IDutente),
   FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipolibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- --------------------------------------------------------
@@ -127,11 +128,11 @@ CREATE TABLE Commento(
   Corpo varchar(200) NOT NULL,
   DataCommento timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   IDVoto int NOT NULL,
-  IDUtente varchar(100) NOT NULL,
+  IDUtente int NOT NULL,
   IDLibro int NOT NULL,
   PRIMARY KEY (IDCommento),
   FOREIGN KEY (IDVoto) REFERENCES Voto(IDVoto),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDutente),
   FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -142,13 +143,13 @@ CREATE TABLE Commento(
 
 CREATE TABLE MetodoPagamento(
   IDMetodo int NOT NULL AUTO_INCREMENT,
-  IDUtente varchar(100) NOT NULL,
+  IDUtente int NOT NULL,
   Tipo varchar(10),
   NumeroCarta varchar(50) NOT NULL,
   CVC int NOT NULL,
   DataScadenza date NOT NULL,
   PRIMARY KEY (IDMetodo),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(CodFiscale)
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDutente)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -158,12 +159,12 @@ CREATE TABLE MetodoPagamento(
 CREATE TABLE CarrelloLibri(
   IDCarrelloLibri int NOT NULL AUTO_INCREMENT,
   IDLibro int NOT NULL,
-  IDutente varchar(100) NOT NULL,
+  IDutente int NOT NULL,
   Quantita int NOT NULL,
   Tipo varchar(100) NOT NULL,
   PRIMARY KEY (IDCarrelloLibri),
   FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro),
-  FOREIGN KEY (IDutente) REFERENCES Utente(CodFiscale)
+  FOREIGN KEY (IDutente) REFERENCES Utente(IDutente)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -190,7 +191,7 @@ CREATE TABLE Ordine(
   dataAcquisto date NOT NULL,
   PRIMARY KEY (IDOrdine),
   FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
-  FOREIGN KEY (IDutente) REFERENCES Utente (codFiscale),
+  FOREIGN KEY (IDutente) REFERENCES Utente (IDutente),
   FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
   
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
