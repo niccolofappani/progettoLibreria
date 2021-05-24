@@ -12,16 +12,16 @@
                 <h3>Azioni da amministratore</h3>
                 <form method="get" action="getQuery.php">
                   <p>Visualizza catalogo libri</p>
-                  <button type="submit">Visualizza libri</button>
+                  <button type="submit">Visualizza</button>
                 </form>
                 <form method="post" action="inserimento.php">
                   <p>Inserisci libri</p>
-                  <button>Invio</button>
+                  <button>Inserisci</button>
                 </form>
                 
                 <form method="get" action="getOrder.php">
                   <p>Visualizza ordini</p>
-                  <button type="submit">Visualizza ordini</button>
+                  <button type="submit">Visualizza</button>
                 </form>
 
               

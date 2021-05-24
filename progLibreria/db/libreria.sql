@@ -168,18 +168,6 @@ CREATE TABLE CarrelloLibri(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Struttura della tabella ProdOrdinati unico per ogni utente
---
-CREATE TABLE ProdOrdinati (
-  IDprodOrdinati int NOT NULL,
-  Quantita int NOT NULL,
-  IDLibro int NOT NULL,
-  PRIMARY KEY (IDprodOrdinati, IDlibro),
-  FOREIGN KEY (IDprodOrdinati) REFERENCES Ordine(IDOrdine),
-  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
 -- Struttura della tabella Ordine con i libri acquistati
 --
 
@@ -190,10 +178,21 @@ CREATE TABLE Ordine(
   IDMetodo int NOT NULL,
   dataAcquisto date NOT NULL,
   PRIMARY KEY (IDOrdine),
-  FOREIGN KEY (IDOrders) REFERENCES Orders (IDOrders),
   FOREIGN KEY (IDutente) REFERENCES Utente (IDutente),
   FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
   
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Struttura della tabella ProdOrdinati unico per ogni utente
+--
+CREATE TABLE ProdOrdinati (
+  IDprodOrdinati int NOT NULL,
+  Quantita int NOT NULL,
+  IDLibro int NOT NULL,
+  PRIMARY KEY (IDprodOrdinati, IDlibro),
+  FOREIGN KEY (IDprodOrdinati) REFERENCES Ordine(IDOrdine),
+  FOREIGN KEY (IDLibro) REFERENCES TipoLibro(IDTipoLibro)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
