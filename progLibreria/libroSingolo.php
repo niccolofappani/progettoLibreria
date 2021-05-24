@@ -66,15 +66,47 @@
                 <h2>Totale: € ".$_SESSION['row']['Prezzo']."</h2>
                 <label for='copie'>Quantita: </label><input id='numerolibri' type='number' value='1' min='1' max='".$_SESSION['row']['Quantita']."'>";
                 if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
-                    echo "<button type='submit'  class='btn btn-warning' onclick='ajaxCarrello()' id='".$_SESSION['row']['Tipo']."'>Aggiungi al carrello</button></div>";
+                    echo "<button type='submit' id='tipologia' class='btn btn-warning' onclick='ajaxCarrello()' id='".$_SESSION['row']['Tipo']."'>Aggiungi al carrello</button></div>";
                 }else{
                     $alert= "Hai bisogno di effettuare il login";           
-                    echo "<button type='submit' class='btn btn-warning'  id='".$_SESSION['row']['Tipo']."' title='Devi effettuare il login' disabled>Aggiungi al carrello</button></div>";
+                    echo "<button type='submit' id='tipologia' class='btn btn-warning'  id='".$_SESSION['row']['Tipo']."' title='Devi effettuare il login' disabled>Aggiungi al carrello</button></div>";
                 }
                 
                 echo "</div>
                 <script src='buttons.js'></script>";
             ?>
+
+            <div class="commenti">		
+                <h2>Commenti</h2>		
+                <form method="POST" id="commentForm">
+                    <div class="form-group">
+                        <?php
+                            if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
+                                echo $_SESSION['user'];
+                            }
+                            else{
+                                echo 'Hai bisogno di effettuare il login per commentare';
+                            }
+                        ?>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="corpo" id="corpo" class="form-control" placeholder="Scrivi il tuo commento" rows="4" required></textarea>
+                    </div>
+                    <span id="message"></span>
+                    <div class="form-group">
+                        <?php
+                        if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
+                            echo "<input type='hidden' name='commentId' id='commentId' value='0' />
+                                <input type='submit' name='submit' id='submit' class='btn btn-primary' value='Invia' />";
+                        }else{      
+                            echo "<input type='hidden' name='commentId' id='commentId' value='0' />
+                            <input type='submit' name='submit' id='submit' class='btn btn-primary' value='Invia' disabled/>";
+                        }
+                        ?>
+                    </div>
+                </form>		
+                <div id="showComments"></div>   
+            </div>	
         </div>
     </body>
-</html>    
+</html>

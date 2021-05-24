@@ -194,7 +194,8 @@ input:focus{
 }
 
 #tipologia{
-  color: red;
+  margin-left: 10px;
+  color: white;
 }
 
 #buttonCarrello{
