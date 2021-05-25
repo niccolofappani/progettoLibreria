@@ -15,66 +15,51 @@
     </head>
     <body>
         <div id="background">
+            <div id="container">
+                <div id="top">
+                    <label id="title">Libreria: Presta-Vendi</label>
+                    <form id="searchForm">
+                        <input id="searchBar" type="search" placeholder="Cerca..."></input>
+                        <button id="searchButton"><img src="img/searchIcon.png"></button>
+                    </form>
+                </div>
 
-        <div id="container">
-            <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
+                <input type='button' class='btn btn-warning' id='home' value='Home' onclick=document.location='index.php'></input>
 
-            <div id="top">
-                <label id="title">Libreria di Scandicci</label>
-                <form id="searchForm">
-                    <input id="searchBar" type="search" placeholder="Cerca..."></input>
-                    <button id="searchButton"><img src="img/searchIcon.png"></button>
-                </form>
-            </div>
-                
-            <div id="buttons">
-                <h3>
-                    <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
-                    <input type="button" class="btn btn-warning" id="signUp" value="Registrati" onclick="document.location='SignUp.php'"></input>
-                    <input type="button" class="btn btn-warning" id="catalogo" value="Catalogo" onclick="document.location='catalogo.php'"></input>
-                    <button id="cart"><i class="fa fa-shopping-cart"></i></button>
-                </h3>
-            </div>
+                <?php
+                if(isset($_SESSION["logged"]) && $_SESSION["logged"]==true){ 
+                    echo "<div id='buttons'>
+                        <button id='profile'>Ciao ".$_SESSION['user']."</button>
+                        <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                        <button id='cart'><i class='fa fa-shopping-cart'></i></button><br>
+                        <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
+                    </div>";
+                }else{
+                    echo "<div id='buttons'>
+                    <h3>
+                        <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
+                        <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
+                        <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                        <button id='cart'><i class='fa fa-shopping-cart'></i></button>
+                    </h3>
+                </div>";
+                }
+                ?>
 
-            <div class="dropdown">
-                <button class="dropbtn">Genere</button>
-                <div class="dropdown-content">
-                    <a href="#" class="genere">Biografia</a>
-                    <a href="#" class="genere">Storico</a>
-                    <a href="#" class="genere">Giallo</a>
-                    <a href="#" class="genere">Thriller</a>
-                    <a href="#" class="genere">Avventura</a>
-                    <a href="#" class="genere">Fantascienza</a>
-                    <a href="#" class="genere">Fantasy</a>
-                    <a href="#" class="genere">Umorismo</a>
-                    <a href="#" class="genere">Narrativa</a>
-                </div> 
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">Prezzo</button>
-                <div class="dropdown-content">
-                    <a href="#">Fino a 5€</a>
-                    <a href="#">5-10€</a>
-                    <a href="#">10-15€</a>
-                    <a href="#">15€+</a>
+                <div id="description">
+                    <p>
+                        La libreria di Scandicci offre una vasta scelta di libri, sia per i grandi che per i piccini.
+                        È possibile sia acquistare che prendere in prestito i libri, basta registrarsi e poi fare il 
+                        login prima di compiere una delle due azioni. </br>
+                        Per comprare un libro sarà necessario inserire i dati di pagamento, mentre per prenderlo 
+                        in prestito sarà necessario inserire la data d'inizio del prestito e della fine, con un massimo di 30 giorni.
+                    </p>
                 </div>
             </div>
-
-            <div  id="description">
-                <p>
-                    La libreria di Scandicci offre una vasta scelta di libri, sia per i grandi che per i piccini.
-                    È possibile sia acquistare che prendere in prestito i libri, basta registrarsi e poi fare il 
-                    login prima di compiere una delle due azioni. </br>
-                    Per comprare un libro sarà necessario inserire i dati di pagamento, mentre per prenderlo 
-                    in prestito sarà necessario inserire la data d'inizio del prestito e della fine, con un massimo di 30 giorni.
-                </p>
-            </div>
         </div>
-</div>
         <script src="catalogScript.js"></script>
     </body>
 <?php 
-    $conn->close() 
+    $conn->close();
 ?>
 </html>

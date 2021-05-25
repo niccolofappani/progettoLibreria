@@ -9,16 +9,15 @@
     </head>
     <body>
         <div id="background">
-        </div>
             <div id='container'>
-                <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
                 <div id="top">
-                    <label id="title">Libreria di Scandicci</label>
+                    <label id="title">Libreria: Presta-Vendi</label>
                 </div>
 
+                <input type='button' class='btn btn-warning' id='home' value='Home' onclick=document.location='index.php'></input>
+
                 <div id='buttons'>
-                    <h3><input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick="document.location='SignUp.php'"></input>
-                    <button id='cart'><i class='fa fa-shopping-cart'></i></button></h3>
+                    <input type='button'  class='btn btn-warning' id='signUp' value='Registrati' onclick="document.location='SignUp.php'"></input>
                 </div>
 
                 <form method="post" action="checkLogin.php">
@@ -34,6 +33,6 @@
                     <button type="submit" class="btn btn-primary">Accedi</button>
                 </form>
             </div>
+        </div>
     </body>
 </html>
-

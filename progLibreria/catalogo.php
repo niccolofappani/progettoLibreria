@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    include('db_connect.php');
+    if(isset($_SESSION['codFisc'])){ 
+    $sql="SELECT count(carrelloLibri.IDcarrellolibri) as conto FROM carrelloLibri WHERE CarrelloLibri.IDutente= '".$_SESSION["codFisc"]."'"; 
+    $result=$conn->query($sql);
+    $row = $result->fetch_assoc();
+    }
+?>
+
 <html>
     <head>
         <title>Catalogo</title>
@@ -10,26 +20,37 @@
         
     </head>
     <body>
-        <div id="background"></div>
-        <div id="container">
-            <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
+        <div id="background">
+            <div id="container">
+                <div id="top">
+                    <label id="title">Libreria: Presta-Vendi</label>
+                    <form id="searchForm">
+                        <input id="searchBar" type="search" placeholder="Cerca..."></input>
+                        <button id="searchButton"><img src="img/searchIcon.png"></button>
+                    </form>
+                </div>
+                    
+                <input type='button' class='btn btn-warning' id='home' value='Home' onclick=document.location='index.php'></input>
 
-            <div id="top">
-                <label id="title">Libreria di Scandicci</label>
-                <form id="searchForm">
-                    <input id="searchBar" type="search" placeholder="Cerca..."></input>
-                    <button id="searchButton"><img src="img/searchIcon.png"></button>
-                </form>
-            </div>
+                <?php
+                    if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
+                        echo "<div id='buttons'>
+                            <button id='profile'>Ciao ".$_SESSION['user']."</button>
+                            <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>".$row['conto']."<br>
+                            <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
+                        </div>";
+                    }else{
+                        echo "<div id='buttons'>
+                        <h3>
+                            <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
+                            <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
+                            <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                            <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>
+                        </h3>
+                        </div>";
+                    }
+                ?>
                 
-            <div id="buttons">
-                <h3>
-                    <input type="button" class="btn btn-warning" id="login" value="Login" onclick="document.location='login.php'"></input> 
-                    <input type="button" class="btn btn-warning" id="signUp" value="Registrati" onclick="document.location='SignUp.php'"></input>
-                    <button id="cart"><i class="fa fa-shopping-cart"></i></button>
-                </h3>
-            </div>
-            
                 <?php
                     $servername = "localhost";
                     $username = "root";
@@ -37,33 +58,33 @@
                     $dbname = "libreria";
                     $conn = new mysqli($servername, $username, $password, $dbname);
                     if ($conn->connect_error) { //fallimento della connessione
-                      die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     }
 
-                    $sql= "SELECT Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, libroVendita.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita;";
+                    $sql= "SELECT Libro.IDlibro, Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, TipoLibro.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE Tipo='Nuovo';";
                     $result=$conn->query($sql);
                     if ($result->num_rows > 0) {
                         echo "<div id='ordinamento-libri'>";
                         $i=1;
-                            while($row = $result->fetch_assoc()) {
-                                
-                                echo "<div class='libro'>
-                                    <a href=''><img id='foto' src='".$row['Foto']."' alt='immagine'></a><br>
-                                    <a href=''>".$row['Titolo']." </a> <br>
-                                    <p>Nuovo: ".$row['Prezzo']."</p>
-                                </div>";
-                                if($i%6==0){
-                                    echo "<br>";
-                                }
-                                $i= $i +1;
+                        while($row = $result->fetch_assoc()) {
+                            
+                            echo "<div class='libro'>
+                                <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form><br>
+                                <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
+                                <p>Nuovo: ".$row['Prezzo']." €</p>
+                            </div>";
+                            if($i%6==0){
+                                echo "<br>";
                             }
+                            $i= $i +1;
+                        }
                         echo "</div>";
-                    } 
-                    else {
+                    }else {
                         echo "Database vuoto";
                     }
                 ?>
-            
+            </div>
+        </div>
     </body>
 </html>
 

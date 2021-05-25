@@ -10,8 +10,6 @@
          
     </head>
     <body>
-        <div id='background'></div>
-
         <div id='container'>
             <a href=index.php><img id='logo' src='img/libro.png' alt='libro'></a>
 
@@ -42,7 +40,7 @@
                 </div>
                 <div class='form-group'>
                     <label>Numero Pagine</label>
-                    <input type='text' class='form-control w-50' placeholder='Numero Pagine' required name='NumeroPagine'>
+                    <input type='number' class='form-control w-50' placeholder='Numero Pagine' required name='NumeroPagine'>
                 </div>
                 <div class='form-group'>
                     <label>Lingua</label>
@@ -51,6 +49,18 @@
                 <div class='form-group'>
                     <label>CodAutore</label>
                     <input type='number' class='form-control w-50' placeholder='Codice autore' required name='CodAutore'>
+                </div>
+                <div class='form-group'>
+                    <label>Prezzo</label>
+                    <input type='number' class='form-control w-50' placeholder='Prezzo' required name='Prezzo'>
+                </div>
+                <div class='form-group'>
+                    <label>Numero Libri nuovi</label>
+                    <input type='number' class='form-control w-50' placeholder='Numero libri nuovi' required name='NumeroLibriNuovi'>
+                </div>
+                <div class='form-group'>
+                    <label>Numero Libri usati</label>
+                    <input type='number' class='form-control w-50' placeholder='Numero libri usati' required name='NumeroLibriUsati'>
                 </div>
                 <button type='submit' class='btn btn-primary'>Inserisci</button>
                 </form>

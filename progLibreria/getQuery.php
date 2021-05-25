@@ -20,16 +20,20 @@
     if ($conn->connect_error) { //fallimento della connessione
       die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM Libro LEFT JOIN LibroVendita ON Libro.IDLibro=LibroVendita.IDVendita LEFT JOIN LibroUsato ON Libro.IDLibro=LibroUsato.IDUsato"; //query del get di tutti i libri
-    $result = $conn->query($sql); 
+    $sql = "SELECT * FROM Libro JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE TipoLibro.Tipo='Nuovo'"; 
+    $result = $conn->query($sql);
+    $sql2 = "SELECT * FROM Libro JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE TipoLibro.Tipo='Usato'"; 
+    $result2 = $conn->query($sql2); 
   
-    if ($result->num_rows > 0) {
+    if ($result) {
       echo "<table id='tabellaDB'>";
-      echo "<tr><th>ID</th><th>ISBN</th><th>Titolo</th><th>Genere</th><th>Codice Autore</th><th>Numero Pagine</th><th>Casa Editrice</th><th>
+      echo "<tr><th>ISBN</th><th>Titolo</th><th>Genere</th><th>Codice Autore</th><th>Numero Pagine</th><th>Casa Editrice</th><th>
       Lingua</th><th>Prezzo</th><th>Prezzo Usato</th><th>Copie</th><th>Copie Usato</th></tr>";
-      while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["IDLibro"]. "</td><td>" . $row["ISBN10"]. "</td><td> " . $row["Titolo"]. " </td><td> ". $row["Genere"]. " </td><td> ". $row["CodAutore"]. 
-        " </td><td>". $row["NumeroPagine"]. " </td><td> ". $row["CasaEditrice"]. " </td><td> ". $row["Lingua"]. " </td><td> ".$row["Prezzo"]. " </td><td> ".$row["PrezzoUsato"]." </td><td>". $row["QuantitaVendita"]. " </td><td>".$row["QuantitaUsato"]."</td><td><button class='edit' type='button'>Modifica ✏</button></td><td><button id='".$row["IDLibro"]."' class='delete' 'type='button' >Elimina 🚮</button></td></tr>";
+      while($row = $result->fetch_assoc() and $row2= $result2->fetch_assoc()) {
+        echo "<td>" . $row["ISBN10"]. "</td><td> " . $row["Titolo"]. " </td><td> ". $row["Genere"]. " </td><td> ". $row["CodAutore"]. 
+        " </td><td>". $row["NumeroPagine"]. " </td><td> ". $row["CasaEditrice"]. " </td><td> ". $row["Lingua"]. " </td><td> ".$row["Prezzo"]. " </td><td> ".$row2["Prezzo"]." </td>
+        <td>". $row["Copie"]. " </td><td>".$row2["Copie"]."</td><td><button class='edit' type='button'>Modifica ✏</button></td>
+        <td><button id='".$row["IDLibro"]."' class='delete' 'type='button' >Elimina 🚮</button></td></tr>";
       }
       echo "</table>";
     } 
