@@ -19,7 +19,7 @@
         else if(password_verify($_POST['psw'], $row['Psw'])){
             $_SESSION["logged"]=true;
             $_SESSION["user"]=$row['Nome'];
-            $_SESSION["codFisc"]=$row["CodFiscale"];
+            $_SESSION["codFisc"]=$row["IDUtente"];
             echo '<script>alert("Login effettuato");
             setTimeout(function(){
                 location.replace("index.php")
@@ -41,4 +41,6 @@
         location.href ="login.php";</script>';
     }
     mysqli_close($conn) or die("Chiusura connessione fallita".mysqli_error($conn));
+
+    
 ?>

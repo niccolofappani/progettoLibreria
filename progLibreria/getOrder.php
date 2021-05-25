@@ -20,14 +20,20 @@
     if ($conn->connect_error) { //fallimento della connessione
       die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM Order JOIN Ordine ON Order.IDOrder = Ordine.IDOrder"; //query del get di tutti i libri
+    $sql = "select Ordine.IDOrdine, Utente.Nome, Utente.Cognome, Libro.ISBN10, ProdOrdinati.Quantita, Ordine.dataAcquisto
+    From Ordine
+    JOIN Utente ON Ordine.IDUtente = Utente.IDUtente
+    JOIN prodordinati ON Ordine.IDOrdine = ProdOrdinati.IDprodOrdinati
+    JOIN Libro ON ProdOrdinati.IDLibro = Libro.IDLibro"; //query del get di tutti i libri
     $result = $conn->query($sql); 
   
     if ($result->num_rows > 0) {
       echo "<table id='tabellaDB'>";
-      echo "";
+
+      echo "<tr><th>ID Ordine</th><th>Nome</th><th>Cognome</th><th>ISBN10</th><th>Quantità</th><th>Data D'acquisto</th></tr>";
       while($row = $result->fetch_assoc()) {
-        echo "";
+        echo "<td>" . $row["IDOrdine"]. "</td><td> " . $row["Nome"]. " </td><td> ". $row["Cognome"]. " </td><td> ". $row["ISBN10"]. 
+        " </td><td>". $row["Quantita"]. " </td><td> ". $row["dataAcquisto"]. " </td> ";
     }
       echo "</table>";
     } 

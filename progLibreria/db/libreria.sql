@@ -64,7 +64,7 @@ CREATE TABLE Libro (
 
 CREATE TABLE TipoLibro (
   IDTipoLibro int NOT NULL,
-  Quantita int NOT NULL,
+  Copie int NOT NULL,
   Prezzo float NOT NULL,
   Tipo varchar(100) NOT NULL,
   PRIMARY KEY (IDTipoLibro, Tipo),
@@ -164,7 +164,7 @@ CREATE TABLE Ordine(
   Prezzo float NOT NULL,
   dataAcquisto date NOT NULL,
   PRIMARY KEY (IDOrdine),
-  FOREIGN KEY (IDUtente) REFERENCES Utente (IDUtente),
+  FOREIGN KEY (IDUtente) REFERENCES Utente (IDUtente)
   
   
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -227,7 +227,7 @@ INSERT INTO Libro(ISBN10, Titolo, Genere, Anno, CasaEditrice, NumeroPagine, Ling
 -- Inserimenti tabella TipoLibro
 --
 
-INSERT INTO TipoLibro (IDTipoLibro, Quantita, Prezzo, Tipo)
+INSERT INTO TipoLibro (IDTipoLibro, Copie, Prezzo, Tipo)
   VALUES (1, 5, 8.55, "Nuovo"),
   (2, 11, 12.00, "Nuovo"),
   (3, 24, 11.40, "Nuovo"),
@@ -244,3 +244,4 @@ INSERT INTO TipoLibro (IDTipoLibro, Quantita, Prezzo, Tipo)
   (6, 0, 4.75, "Usato"),
   (7, 15, 3.8, "Usato"),
   (8, 0, 9.4, "Usato");
+

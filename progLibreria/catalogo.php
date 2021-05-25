@@ -20,36 +20,37 @@
         
     </head>
     <body>
-        <div id="container">
-            <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
+        <div id="background">
+            <div id="container">
+                <div id="top">
+                    <label id="title">Libreria: Presta-Vendi</label>
+                    <form id="searchForm">
+                        <input id="searchBar" type="search" placeholder="Cerca..."></input>
+                        <button id="searchButton"><img src="img/searchIcon.png"></button>
+                    </form>
+                </div>
+                    
+                <input type='button' class='btn btn-warning' id='home' value='Home' onclick=document.location='index.php'></input>
 
-            <div id="top">
-                <label id="title">Libreria: Presta-Vendi</label>
-                <form id="searchForm">
-                    <input id="searchBar" type="search" placeholder="Cerca..."></input>
-                    <button id="searchButton"><img src="img/searchIcon.png"></button>
-                </form>
-            </div>
+                <?php
+                    if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
+                        echo "<div id='buttons'>
+                            <button id='profile'>Ciao ".$_SESSION['user']."</button>
+                            <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>".$row['conto']."<br>
+                            <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
+                        </div>";
+                    }else{
+                        echo "<div id='buttons'>
+                        <h3>
+                            <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
+                            <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
+                            <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
+                            <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>
+                        </h3>
+                        </div>";
+                    }
+                ?>
                 
-            <?php
-            if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
-                echo "<div id='buttons'>
-                    <button id='profile'>Ciao ".$_SESSION['user']."</button>
-                    <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>".$row['conto']."<br>
-                    <button id='logoutButton' onclick=document.location='logout.php'>LOGOUT<img src='img/logoutButton.png'></button>
-                </div>";
-            }else{
-                echo "<div id='buttons'>
-                <h3>
-                    <input type='button' class='btn btn-warning' id='login' value='Login' onclick=document.location='login.php'></input>
-                    <input type='button' class='btn btn-warning' id='signUp' value='Registrati' onclick=document.location='SignUp.php'></input>
-                    <input type='button' class='btn btn-warning' id='catalogo' value='Catalogo' onclick=document.location='catalogo.php'></input>
-                    <button id='cart'><i class='fa fa-shopping-cart' onclick=document.location='carrello.php'></i></button>
-                </h3>
-            </div>";
-            }
-            ?>
-            
                 <?php
                     $servername = "localhost";
                     $username = "root";
@@ -57,7 +58,7 @@
                     $dbname = "libreria";
                     $conn = new mysqli($servername, $username, $password, $dbname);
                     if ($conn->connect_error) { //fallimento della connessione
-                      die("Connection failed: " . $conn->connect_error);
+                        die("Connection failed: " . $conn->connect_error);
                     }
 
                     $sql= "SELECT Libro.IDlibro, Libro.Titolo, Libro.Genere, Libro.Foto, Autore.Nome, Autore.Cognome, TipoLibro.Prezzo FROM Libro LEFT JOIN Autore ON Libro.CodAutore = Autore.IDAutore LEFT JOIN TipoLibro ON Libro.IDLibro=TipoLibro.IDTipoLibro WHERE Tipo='Nuovo';";
@@ -65,27 +66,25 @@
                     if ($result->num_rows > 0) {
                         echo "<div id='ordinamento-libri'>";
                         $i=1;
-                            while($row = $result->fetch_assoc()) {
-                                
-                                echo "<div class='libro'>
-                                    <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form><br>
-                                    <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
-                                    <p>Nuovo: ".$row['Prezzo']." €</p>
-                                </div>";
-                                if($i%6==0){
-                                    echo "<br>";
-                                }
-                                $i= $i +1;
+                        while($row = $result->fetch_assoc()) {
+                            
+                            echo "<div class='libro'>
+                                <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'><img class='foto' src='".$row['Foto']."' alt='immagine'></button></form><br>
+                                <form action='libroSingolo.php' method='get'><button type='submit' name='itemid' value='".$row["IDlibro"]."' class='apriLibro'>".$row['Titolo']."</button></form> <br>
+                                <p>Nuovo: ".$row['Prezzo']." €</p>
+                            </div>";
+                            if($i%6==0){
+                                echo "<br>";
                             }
+                            $i= $i +1;
+                        }
                         echo "</div>";
-                    } 
-                    else {
+                    }else {
                         echo "Database vuoto";
                     }
                 ?>
-                </div>
-        
+            </div>
+        </div>
     </body>
-
 </html>
 
