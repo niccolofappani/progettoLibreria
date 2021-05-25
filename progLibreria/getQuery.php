@@ -31,13 +31,9 @@
       Lingua</th><th>Prezzo</th><th>Prezzo Usato</th><th>Copie</th><th>Copie Usato</th></tr>";
       while($row = $result->fetch_assoc() and $row2= $result2->fetch_assoc()) {
         echo "<td>" . $row["ISBN10"]. "</td><td> " . $row["Titolo"]. " </td><td> ". $row["Genere"]. " </td><td> ". $row["CodAutore"]. 
-<<<<<<< HEAD
         " </td><td>". $row["NumeroPagine"]. " </td><td> ". $row["CasaEditrice"]. " </td><td> ". $row["Lingua"]. " </td><td> ".$row["Prezzo"]. " </td><td> ".$row2["Prezzo"]." </td>
         <td>". $row["Copie"]. " </td><td>".$row2["Copie"]."</td><td><button class='edit' type='button'>Modifica ✏</button></td>
         <td><button id='".$row["IDLibro"]."' class='delete' 'type='button' >Elimina 🚮</button></td></tr>";
-=======
-        " </td><td>". $row["NumeroPagine"]. " </td><td> ". $row["CasaEditrice"]. " </td><td> ". $row["Lingua"]. " </td><td> ".$row["Prezzo"]. " </td><td> ".$row2["Prezzo"]." </td><td>". $row["Copie"]. " </td><td>".$row2["Copie"]."</td><td><button class='edit' type='button'>Modifica ✏</button></td><td><button id='".$row["IDLibro"]."' class='delete' 'type='button' >Elimina 🚮</button></td></tr>";
->>>>>>> 97ddb548cde7ae887c66fc5603f6bdb3df875c6d
       }
       echo "</table>";
     } 

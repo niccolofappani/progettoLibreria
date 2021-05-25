@@ -25,7 +25,6 @@
 
     
     if($conn->query($query) === TRUE){
-<<<<<<< HEAD
       $sql = "select Libro.IDLibro From Libro Where Libro.ISBN10 = '$ISBN'";
       $result = $conn->query($sql);
       while($row = $result->fetch_assoc()) {
@@ -37,14 +36,6 @@
         
       }
 
-=======
-    $sql = "select Libro.IDLibro From Libro Where Libro.ISBN10 = '$ISBN'";
-    $result = $conn->query($sql);
-    while($row = $result->fetch_assoc()) {
-      $sqlNuovo = "insert into (IDTipoLibro, Copie, Prezzo, Tipo) values($row,$LibriNuovi,$Prezzo,'Nuovo')";
-      $sqlUsato = "insert into (IDTipoLibro, Copie, Prezzo, Tipo) values($row,$LibriUsati,$Prezzo/2,'Usato')";
-    }
->>>>>>> 97ddb548cde7ae887c66fc5603f6bdb3df875c6d
       echo "Inserito con successo";
       echo "<form action='getQuery.php'><input type='submit' value='Catalogo' class='homebutton' id='btnHome' /></form>";
     }else{
