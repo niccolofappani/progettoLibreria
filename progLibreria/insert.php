@@ -23,26 +23,16 @@
     $query="insert into Libro(ISBN10, Titolo, Genere, CasaEditrice, NumeroPagine, Lingua, CodAutore)
             values('$ISBN','$Titolo','$Genere','$CasaEditrice','$NumPagine','$Lingua','$CodAutore')"; 
 
-    $sql = "select Libro.IDLibro From Libro Where Libro.ISBN10 = '$ISBN'";
-    
     
     if($conn->query($query) === TRUE){
-      if($LibriNuovi > 0 && $LibriUsati == 0){
-        $query2="insert into TipoLIbro(Copie,Prezzo)
-         values('$LibriNuovi', '$Prezzo')";
-      }
-      else if ($LibriUsati > 0 && $LibriNuovi == 0){
-        $query2="insert into TipoLIbro(Copie,Prezzo)
-        values('$LibriUsati', '$Prezzo')";
-      }
-      else {
-        $query2="insert into TipoLIbro(Copie,Prezzo)
-        values('$LibriNuovi', '$Prezzo'),
-        values('$LibriUsati', '$Prezzo')";
-      }
+    $sql = "select Libro.IDLibro From Libro Where Libro.ISBN10 = '$ISBN'";
+    $result = $conn->query($sql);
+    while($row = $result->fetch_assoc()) {
+      $sqlNuovo = "insert into (IDTipoLibro, Copie, Prezzo, Tipo) values($row,$LibriNuovi,$Prezzo,'Nuovo')";
+      $sqlUsato = "insert into (IDTipoLibro, Copie, Prezzo, Tipo) values($row,$LibriUsati,$Prezzo/2,'Usato')";
+    }
       echo "Inserito con successo";
       echo "<form action='getQuery.php'><input type='submit' value='Catalogo' class='homebutton' id='btnHome' /></form>";
-      }
     }else{
       echo "Error:". $query . "<br>" . $conn->error;
     }
