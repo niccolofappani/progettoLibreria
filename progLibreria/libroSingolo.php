@@ -16,7 +16,12 @@
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js'></script>
-        
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src='comments.js'></script>
     </head>
     <body>
         <div id='container'>
@@ -82,7 +87,7 @@
                     <div class="form-group">
                         <?php
                             if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){ 
-                                echo $_SESSION['user'];
+                                echo"<input type='text' name='commentatore' id='commentatore' class='form-control' placeholder='Insersci username' required />";
                             }
                             else{
                                 echo 'Hai bisogno di effettuare il login per commentare';
@@ -90,21 +95,21 @@
                         ?>
                     </div>
                     <div class="form-group">
-                        <textarea name="corpo" id="corpo" class="form-control" placeholder="Scrivi il tuo commento" rows="4" required></textarea>
+                        <textarea name="corpo" id="corpo" class="form-control" placeholder="Inserisci commento" rows="5" required></textarea>
                     </div>
                     <span id="message"></span>
                     <div class="form-group">
                         <?php
                         if(isset($_SESSION["logged"]) and $_SESSION["logged"]==true){
-                            echo "<input type='hidden' name='commentId' id='commentId' value='0' />
+                            echo "<input type='hidden' name='idcorpo' id='idcorpo' value='0' />
                                 <input type='submit' name='submit' id='submit' class='btn btn-primary' value='Invia' />";
                         }else{      
-                            echo "<input type='hidden' name='commentId' id='commentId' value='0' />
-                            <input type='submit' name='submit' id='submit' class='btn btn-primary' value='Invia' disabled/>";
+                            echo "<input type='hidden' name='idcorpo' id='idcorpo' value='0' />
+                                <input type='submit' name='submit' id='submit' class='btn btn-primary' value='Invia' disabled/>";
                         }
                         ?>
                     </div>
-                </form>		
+                </form>
                 <div id="showComments"></div>   
             </div>	
         </div>

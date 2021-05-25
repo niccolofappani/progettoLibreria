@@ -80,10 +80,10 @@ CREATE TABLE TipoLibro (
 
 CREATE TABLE Utente (
   IDUtente int NOT NULL AUTO_INCREMENT,
-  CodFiscale varchar(100) NOT NULL,
+  CodFiscale varchar(100) NOT NULL UNIQUE,
   Nome varchar(50) NOT NULL,
   Cognome varchar(50) NOT NULL,
-  Email varchar(100) NOT NULL,
+  Email varchar(100) NOT NULL UNIQUE,
   Psw varchar(500) NOT NULL,
   Via varchar(50) NOT NULL,
   NumeroCivico varchar(10) NOT NULL,
@@ -138,21 +138,6 @@ CREATE TABLE Commento(
   FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
---
--- Struttura della tabella Metodo di pagamento
---
-
-CREATE TABLE MetodoPagamento(
-  IDMetodo int NOT NULL AUTO_INCREMENT,
-  IDUtente int NOT NULL,
-  Tipo varchar(10),
-  NumeroCarta varchar(50) NOT NULL,
-  CVC int NOT NULL,
-  DataScadenza date NOT NULL,
-  PRIMARY KEY (IDMetodo),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Struttura della tabella Carrello libri
@@ -177,11 +162,10 @@ CREATE TABLE Ordine(
   IDOrdine int NOT NULL AUTO_INCREMENT,
   IDUtente int NOT NULL,
   Prezzo float NOT NULL,
-  IDMetodo int NOT NULL,
   dataAcquisto date NOT NULL,
   PRIMARY KEY (IDOrdine),
   FOREIGN KEY (IDUtente) REFERENCES Utente (IDUtente),
-  FOREIGN KEY (IDMetodo) REFERENCES MetodoPagamento(IdMetodo)
+  
   
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

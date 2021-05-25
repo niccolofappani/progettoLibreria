@@ -1,4 +1,5 @@
 $(document).ready(function(){ 
+	showComments();
 	$('#commentForm').on('submit', function(event){
 		event.preventDefault();
 		var formData = $(this).serialize();
@@ -10,7 +11,7 @@ $(document).ready(function(){
 			success:function(response) {
 				if(!response.error) {
 					$('#commentForm')[0].reset();
-					$('#commentId').val('0');
+					$('#idcorpo').val('0');
 					$('#message').html(response.message);
 					showComments();
 				} else if(response.error){
@@ -18,5 +19,16 @@ $(document).ready(function(){
 				}
 			}
 		})
-	});	
+	});
 });
+
+//visualizzazione commenti degli altri utenti
+function showComments() {
+	$.ajax({
+		url:"showComments.php",
+		method:"POST",
+		success:function(response) {
+			$('#showComments').html(response);
+		}
+	})
+}

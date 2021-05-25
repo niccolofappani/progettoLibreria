@@ -17,7 +17,7 @@
         <div id="container">
             <a href=index.php><img id="logo" src="img/libro.png" alt="libro"></a>
             <div id="top">
-                <label id="title">Libreria di Scandicci</label>
+                <label id="title">Libreria: Presta-Vendi</label>
                 <form id="searchForm">
                     <input id="searchBar" type="search" placeholder="Cerca..."></input>
                     <button id="searchButton"><img src="img/searchIcon.png"></button>

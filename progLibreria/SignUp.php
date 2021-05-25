@@ -18,7 +18,7 @@
             <a href=index.php><img id='logo' src='img/libro.png' alt='libro'></a>
 
             <div id='top'>
-                    <label id='title'>Libreria di Scandicci</label>
+                    <label id='title'>Libreria: Presta-Vendi</label>
                 </div>
 
             <div id='buttons'>

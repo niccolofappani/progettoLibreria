@@ -1,8 +1,6 @@
-
-
 <?php
     session_start();
-    $host = "localhost:3310";
+    $host = "localhost";
     $user = "root";
     $pass = "";
     $db = "libreria";
