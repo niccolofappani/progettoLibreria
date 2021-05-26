@@ -18,7 +18,7 @@
         $sql2="UPDATE carrelloLibri SET carrelloLibri.Quantita = ".$quantita." WHERE carrelloLibri.IDLibro=".$_SESSION['itemid']." AND carrelloLibri.Tipo='".$tipo."'";
         $conn->query($sql2);
     }else{
-        $sql="insert into carrelloLibri(IDlibro, IDutente, Copie, Tipo)
+        $sql="insert into carrelloLibri(IDlibro, IDutente, Quantita, Tipo)
             values(".$_SESSION['itemid'].", '".$_SESSION['codFisc']."', ".$numero.", '".$tipo."')";
     
     $conn->query($sql);

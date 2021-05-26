@@ -60,8 +60,8 @@
 
                         echo "</div>";
                         echo "<div id='pagamento'>
-                        <h2>Totale: € ".$prezzo."</h2>        
-                        <button id='buy' onclick=''>Procedi al pagamento</button></div>";
+                        <form action='charge.php' method='post'><input type='text' name='amount' value='20.00'>       
+                        <button id='buy' onclick=''>Procedi al pagamento</button></form></div>";
 
 
                         echo "<script src='rimuovi.js'></script>";
